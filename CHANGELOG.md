@@ -2,6 +2,19 @@
 
 Hier staat elke wijziging in cijfers of rekenmethode, met datum en reden. Nieuwste bovenaan.
 
+## 14 november 2026 (later op de dag)
+
+**Koophuis toegevoegd aan de berekening**
+
+- Nieuw: eigenwoningforfait 2026, aftrek van hypotheekrente en de aftrek wegens geen of geringe eigenwoningschuld (71,867%). Bron: Belastingdienst, Fiscale informatie 2026, hoofdstuk 10.
+- Reden: voor huiseigenaren liet de site te veel belasting zien.
+- Getoetst aan twee rekenvoorbeelden van de Belastingdienst (forfait € 980 bij een WOZ-waarde van € 280.000; aftrek € 216 bij forfait € 1.500 en rente € 1.200).
+- De Zvw-bijdrage van ondernemers en de werkgeverspremies rekenen nu uitdrukkelijk over winst of loon, zonder het inkomen uit de eigen woning. Voor wie geen koophuis invult verandert er niets.
+
+**Teksten**
+
+- Duidelijkere uitleg bij "zelf betalen", en een toelichting bij de leeftijdsgroepen van kinderen.
+
 ## 14 november 2026
 
 **Eerste versie**

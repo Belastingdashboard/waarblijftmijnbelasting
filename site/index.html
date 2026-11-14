@@ -171,7 +171,7 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
     </div>
 
     <details>
-      <summary>Heb je kinderen, een partner of een huurhuis?</summary>
+      <summary>Heb je kinderen, een partner, een huurhuis of een koophuis?</summary>
       <div class="inner">
         <p class="small soft">Vul dit in en we rekenen ook uit wat je van de overheid krijgt, zoals zorgtoeslag en kinderbijslag.</p>
         <label class="check"><input type="checkbox" id="partner"> <span>Ik woon samen met een partner</span></label>
@@ -186,10 +186,19 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
             <div><span class="small soft">12 t/m 15 jaar</span><input type="number" id="k12" min="0" max="10" value="0" inputmode="numeric" aria-label="Kinderen van 12 tot en met 15 jaar"></div>
             <div><span class="small soft">16 en 17 jaar</span><input type="number" id="k16" min="0" max="10" value="0" inputmode="numeric" aria-label="Kinderen van 16 en 17 jaar"></div>
           </div>
+          <span class="small soft">Kinderen van 18 jaar en ouder vul je niet in. Voor hen krijg je geen kinderbijslag en kindgebonden budget meer.</span>
         </div>
         <div class="field"><label for="huur">Hoeveel huur betaal je per maand?</label>
           <input type="number" id="huur" min="0" step="10" value="0" inputmode="numeric">
           <span class="small soft">Zonder servicekosten. Laat op 0 staan als je niet huurt.</span>
+        </div>
+        <div class="field"><label for="woz">Heb je een koophuis? Wat is de WOZ-waarde?</label>
+          <input type="number" id="woz" min="0" step="1000" value="0" inputmode="numeric">
+          <span class="small soft">Dit staat op de brief van je gemeente over de gemeentebelasting. Laat op 0 staan als je geen koophuis hebt.</span>
+        </div>
+        <div id="f-rente" class="field hidden"><label for="rente">Hoeveel hypotheekrente betaal je per jaar?</label>
+          <input type="number" id="rente" min="0" step="100" value="0" inputmode="numeric">
+          <span class="small soft">Dit staat op het jaaroverzicht van je bank. Alleen de rente, niet wat je aflost. Vul 0 in als je geen hypotheek hebt.</span>
         </div>
         <label class="check"><input type="checkbox" id="aow"> <span>Ik krijg AOW</span></label>
         <div id="f-zzp" class="hidden">
@@ -210,6 +219,7 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
       <div class="box"><div class="l" id="l-bruto">Je bruto loon</div><div class="n" id="n-bruto"></div></div>
       <div class="box"><div class="l">Belasting per maand</div><div class="n" id="n-tax"></div></div>
       <div class="box" style="grid-column:1/-1;background:var(--forest);border-color:transparent;color:var(--paper)"><div class="l" style="color:#d5dccd">Je houdt over per maand</div><div class="n" id="n-net"></div></div>
+      <div class="box wide hidden" id="box-huis"><div class="l" id="l-huis"></div><div class="n" id="n-huis"></div><div class="small" id="t-huis"></div></div>
       <div class="box wide hidden" id="box-toe"><div class="l">Je krijgt van de overheid</div><div class="n" id="n-toe"></div><div class="small" id="t-toe"></div></div>
     </div>
     <details>
@@ -228,8 +238,9 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
     <p class="soft">Zet een schuifje uit en kijk wat er gebeurt als de overheid ermee stopt. Wat houd je over? En wat betaal je dan zelf?</p>
     <div id="cats"></div>
     <details>
-      <summary>Waarom betaal ik zelf vaak meer dan ik bespaar?</summary>
+      <summary>Waarom kost zelf betalen vaak meer dan de belasting die je terugkrijgt?</summary>
       <div class="inner">
+        <p>Stopt de overheid ergens mee, dan betaal jij minder belasting. Maar je moet het dan zelf regelen en betalen. Dat kost vaak meer dan wat je aan belasting overhoudt. Dat heeft twee redenen.</p>
         <p>Jouw belasting op je loon is maar een deel van wat de overheid binnenkrijgt. De rest komt van bedrijven, van werkgevers en uit de btw op alles wat mensen kopen.</p>
         <p>Daarnaast delen we de kosten met elkaar. Wie nu weinig zorg nodig heeft, betaalt mee voor wie veel nodig heeft. Later kan dat andersom zijn.</p>
       </div>
@@ -260,7 +271,7 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
         <h3>Dit telt niet mee</h3>
         <ul>
           <li>Vakantiegeld, als je invult wat je per maand krijgt. We rekenen met 12 keer je maandbedrag.</li>
-          <li>Pensioenpremie en aftrekposten zoals hypotheekrente.</li>
+          <li>Pensioenpremie en andere aftrekposten dan hypotheekrente, zoals giften en zorgkosten.</li>
           <li>Belasting op spaargeld en beleggingen.</li>
           <li>Btw, accijns op benzine, energiebelasting en gemeentelijke belastingen. Die betaal je ook, maar niet via je loon.</li>
           <li>Kinderopvangtoeslag.</li>
@@ -271,6 +282,7 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
           <li>Zorgkosten zijn de gemiddelde kosten van de basisverzekering per persoon in 2024. Het verpleeghuis en andere langdurige zorg zitten daar niet in.</li>
           <li>Kosten per leerling zijn wat het Rijk in 2026 per leerling aan scholen betaalt. Kinderen van 4 en 5 zijn niet meegeteld.</li>
           <li>Een eigen bedrijf betekent hier een eenmanszaak of vof, geen bv.</li>
+          <li>Bij een koophuis rekenen we het hele huis en alle hypotheekrente aan jou toe, ook als je een partner hebt. We gaan ervan uit dat je de rente mag aftrekken.</li>
           <li>Dit is geen belastingadvies. Je echte aanslag kan iets afwijken.</li>
         </ul>
         <h3>Zelf narekenen</h3>
@@ -317,7 +329,7 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
     $(b).addEventListener('input',function(){ $(a).value=$(b).value; teken(); });
   }
   koppel('netto-s','netto'); koppel('loon-s','loon'); koppel('omzet-s','omzet'); koppel('kosten-s','kosten');
-  ['uren','starter','partner','pink','k0','k6','k12','k16','huur','aow'].forEach(function(id){ $(id).addEventListener('input',teken); });
+  ['uren','starter','partner','pink','k0','k6','k12','k16','huur','woz','rente','aow'].forEach(function(id){ $(id).addEventListener('input',teken); });
 
   function toonVelden(){
     $('b-loon').setAttribute('aria-pressed', type==='loondienst');
@@ -342,7 +354,7 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
       urencriterium:$('uren').checked, starter:$('starter').checked, aow:$('aow').checked,
       partner:$('partner').checked, partnerInkomen:val('pink'),
       kinderen:{k0tot5:Math.floor(val('k0')),k6tot11:Math.floor(val('k6')),k12tot15:Math.floor(val('k12')),k16en17:Math.floor(val('k16'))},
-      huur:val('huur')
+      huur:val('huur'), woz:val('woz'), hypotheekrente:val('rente')
     };
   }
   // Zoek het bruto jaarsalaris dat hoort bij een netto jaarbedrag (netto loopt altijd op met bruto)
@@ -356,7 +368,8 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
   }
   function invoer(){
     var inv = basis();
-    if (type==='loondienst') inv.brutoLoon = metBruto ? val('loon') : brutoBijNetto(val('netto')*12, inv);
+    // Wat je werkgever overmaakt staat los van je huis: het voordeel van de hypotheekrente krijg je van de Belastingdienst.
+    if (type==='loondienst') inv.brutoLoon = metBruto ? val('loon') : brutoBijNetto(val('netto')*12, Object.assign({}, inv, { woz:0, hypotheekrente:0 }));
     return inv;
   }
 
@@ -404,6 +417,17 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
   function teken(){
     var inv = invoer(), r = B.bereken(inv), zzp = type==='ondernemer';
     $('f-partner').classList.toggle('hidden', !inv.partner);
+    $('f-rente').classList.toggle('hidden', !(inv.woz>0));
+    // Wat scheelt het koophuis? Vergelijk met dezelfde som zonder huis.
+    var huis = r.woning ? B.bereken(Object.assign({}, inv, { woz:0, hypotheekrente:0 })).heffingTotaal - r.heffingTotaal : 0;
+    $('box-huis').classList.toggle('hidden', !r.woning || Math.abs(huis) < 6);
+    if (r.woning){
+      $('l-huis').textContent = huis>=0 ? 'Minder belasting door je koophuis' : 'Meer belasting door je koophuis';
+      $('n-huis').textContent = M(Math.abs(huis))+' per maand';
+      $('t-huis').textContent = huis>=0
+        ? 'Dit zit al in de bedragen hierboven. Het staat niet op je loonstrook: je krijgt het van de Belastingdienst, per maand of na je aangifte.'
+        : 'Dit zit al in de bedragen hierboven. Voor een koophuis tel je een bedrag bij je inkomen op. Dat is meer dan de rente die je betaalt.';
+    }
 
     var per100 = r.bruto>0 ? r.heffingTotaal/r.bruto*100 : 0;
     $('zin').innerHTML = r.bruto<=0 ? 'Vul hierboven een bedrag in.'
@@ -431,6 +455,12 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
       h += rij('Mkb-winstvrijstelling (12,7%)', -r.mkbVrijstelling);
       h += rij('Hierover betaal je belasting', r.belastbaarInkomen, 'tot');
     } else h += rij('Bruto salaris', r.bruto, 'tot');
+    if (r.woning){
+      h += rij('Bijtelling voor je koophuis (eigenwoningforfait)', r.woning.forfait);
+      if (r.woning.rente) h += rij('Hypotheekrente', -r.woning.rente);
+      if (r.woning.aftrekGeringeSchuld) h += rij('Aftrek omdat je weinig of geen hypotheek hebt', -r.woning.aftrekGeringeSchuld);
+      h += rij('Hierover betaal je belasting', r.belastbaarInkomen, 'tot');
+    }
     h += rij('Belasting over de eerste € 38.883', r.schijven.s1);
     if (r.schijven.s2) h += rij('Belasting tot € 78.426 (37,56%)', r.schijven.s2);
     if (r.schijven.s3) h += rij('Belasting daarboven (49,50%)', r.schijven.s3);
@@ -509,6 +539,7 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
     ['Belastingdienst: arbeidskorting', B.BRONNEN.arbeidskorting],
     ['Belastingdienst: zorgverzekeringswet', B.BRONNEN.zvw],
     ['Belastingdienst: zelfstandigenaftrek', B.BRONNEN.zelfstandigenaftrek],
+    ['Belastingdienst: eigen woning', B.BRONNEN.eigenWoning],
     ['Dienst Toeslagen: zorgtoeslag', B.BRONNEN.zorgtoeslag],
     ['Dienst Toeslagen: kindgebonden budget', B.BRONNEN.kindgebondenBudget],
     ['Dienst Toeslagen: huurtoeslag', B.BRONNEN.huurtoeslag],

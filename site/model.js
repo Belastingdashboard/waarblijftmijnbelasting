@@ -34,6 +34,12 @@
     // Ondernemers
     zelfstandigenaftrek: 1200, startersaftrek: 2123, mkbVrijstelling: 0.127,
     maxAftrekTarief: 0.3756,
+    // Eigen woning (Belastingdienst, Fiscale informatie 2026, hoofdstuk 10)
+    // Eigenwoningforfait: [WOZ-waarde meer dan, percentage over de hele WOZ-waarde]
+    ewf: [[0, 0], [12500, 0.0010], [25000, 0.0020], [50000, 0.0025], [75000, 0.0035]],
+    ewfGrensHoog: 1350000, ewfBedragHoog: 4725, ewfPctBovenGrens: 0.0235,
+    // Aftrek wegens geen of geringe eigenwoningschuld: deel van (forfait min aftrekbare kosten)
+    hillenPct: 0.71867,
     // Werkgeverspremies (over loon tot zvwMaxInkomen)
     wwLaag: 0.0274, aofLaag: 0.0627, aofHoog: 0.0763, wko: 0.0050, whkGemiddeld: 0.0152,
     // Zorgtoeslag (Dienst Toeslagen, rekenblad 2026)
@@ -86,6 +92,15 @@
                : Math.min(p.iackMax, p.iackPct * (a - p.iackDrempel));
   }
 
+  // Eigenwoningforfait: het bedrag dat je bij je inkomen telt omdat je een koophuis hebt
+  function eigenwoningforfait(woz, p) {
+    if (!(woz > 0)) return 0;
+    if (woz > p.ewfGrensHoog) return p.ewfBedragHoog + p.ewfPctBovenGrens * (woz - p.ewfGrensHoog);
+    var pct = 0;
+    for (var i = 0; i < p.ewf.length; i++) if (woz > p.ewf[i][0]) pct = p.ewf[i][1];
+    return pct * woz;
+  }
+
   function ouderenkorting(v, p) {
     return Math.max(0, p.okMax - p.okAfbouw * Math.max(0, v - p.okAfbouwStart));
   }
@@ -97,7 +112,9 @@
    *   urencriterium (bool), starter (bool), aow (bool),
    *   partner (bool), partnerInkomen,
    *   kinderen: { k0tot5, k6tot11, k12tot15, k16en17 },
-   *   huur (kale huur per maand, 0 = geen huurwoning)
+   *   huur (kale huur per maand, 0 = geen huurwoning),
+   *   woz (WOZ-waarde van je koophuis, 0 = geen koophuis),
+   *   hypotheekrente (aftrekbare hypotheekrente per jaar)
    * }
    */
   function bereken(invoer, p) {
@@ -130,12 +147,26 @@
       arbeidsinkomen = belastbaar;
     }
     r.bruto = invoer.type === 'ondernemer' ? r.winst : belastbaar;
+
+    // Eigen woning: forfait erbij, hypotheekrente eraf. Alles op naam van de invuller.
+    var zonderWoning = belastbaar;
+    var woz = Math.max(0, invoer.woz || 0);
+    if (woz > 0) {
+      var forfait = eigenwoningforfait(woz, p);
+      var rente = Math.max(0, invoer.hypotheekrente || 0);
+      // Is het forfait hoger dan de rente, dan is een deel van het verschil aftrekbaar
+      var hillen = forfait > rente ? p.hillenPct * (forfait - rente) : 0;
+      var saldo = forfait - rente - hillen;
+      belastbaar = Math.max(0, zonderWoning + saldo);
+      aftrekposten += rente;
+      r.woning = { woz: woz, forfait: forfait, rente: rente, aftrekGeringeSchuld: hillen, saldo: saldo };
+    }
     r.belastbaarInkomen = belastbaar;
 
     var s = schijven(belastbaar, p, aow);
     // Aftrekposten zijn in de hoogste schijf maximaal 37,56% waard
     var correctie = 0;
-    if (aftrekposten > 0) {
+    if (aftrekposten > 0 && belastbaar > 0) {
       var inTop = Math.min(aftrekposten, Math.max(0, belastbaar + aftrekposten - p.schijf2Grens));
       correctie = (p.tarief3 - p.maxAftrekTarief) * inTop;
     }
@@ -152,7 +183,8 @@
     var kortingenBenut = Math.min(kortingenTotaal, belastingVoorKorting);
     var inkomstenbelasting = belastingVoorKorting - kortingenBenut;
 
-    var zvwZelf = invoer.type === 'ondernemer' ? p.zvwZelf * Math.min(belastbaar, p.zvwMaxInkomen) : 0;
+    // De Zvw-bijdrage gaat over de winst, niet over het inkomen uit de eigen woning
+    var zvwZelf = invoer.type === 'ondernemer' ? p.zvwZelf * Math.min(zonderWoning, p.zvwMaxInkomen) : 0;
 
     r.schijven = s;
     r.tariefsaanpassing = correctie;
@@ -172,7 +204,7 @@
 
     // Wat de werkgever bovenop het loon afdraagt (alleen loondienst)
     if (invoer.type !== 'ondernemer') {
-      var grondslag = Math.min(belastbaar, p.zvwMaxInkomen);
+      var grondslag = Math.min(zonderWoning, p.zvwMaxInkomen);
       r.werkgever = {
         zvw: p.zvwWerkgever * grondslag,
         ww: p.wwLaag * grondslag,
@@ -242,11 +274,14 @@
     kindgebondenBudget: 'https://download.belastingdienst.nl/toeslagen/docs/berekening_kindgebonden_budget_tg0811z61fd.pdf',
     huurtoeslag: 'https://download.belastingdienst.nl/toeslagen/docs/berekening_huurtoeslag_tg0831z61fd.pdf',
     kinderbijslag: 'https://www.svb.nl/nl/kinderbijslag/bedragen-betaaldagen/bedragen-kinderbijslag',
-    zorgpremie: 'https://www.rijksoverheid.nl/onderwerpen/zorgverzekering/vraag-en-antwoord/premie-zorgverzekering'
+    zorgpremie: 'https://www.rijksoverheid.nl/onderwerpen/zorgverzekering/vraag-en-antwoord/premie-zorgverzekering',
+    eigenWoning: 'https://www.belastingdienst.nl/wps/wcm/connect/fisin/fisin2026/eigen_woning_en_restschuld_vroegere',
+    eigenwoningforfait: 'https://www.belastingdienst.nl/wps/wcm/connect/nl/koopwoning/content/hoe-werkt-eigenwoningforfait'
   };
 
   var api = { P2026: P2026, bereken: bereken, BRONNEN: BRONNEN,
-              arbeidskorting: arbeidskorting, algemeneHeffingskorting: algemeneHeffingskorting };
+              arbeidskorting: arbeidskorting, algemeneHeffingskorting: algemeneHeffingskorting,
+              eigenwoningforfait: eigenwoningforfait };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.Belasting = api;
 })(typeof window !== 'undefined' ? window : this);

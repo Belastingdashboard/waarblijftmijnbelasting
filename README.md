@@ -68,11 +68,17 @@ Zie je een cijfer of berekening die niet klopt? Maak een [issue](https://github.
 
 ## Hoe AI is gebruikt
 
-Bij het bouwen van deze site is een AI-assistent (Claude Code) gebruikt voor de code, de teksten en de indeling van deze repo.
+Bij het bouwen van deze site is een AI-assistent (Claude Code) gebruikt. Die heeft de officiële bronnen opgezocht, de cijfers eruit overgenomen en de code, de teksten en de indeling van deze repo geschreven.
 
-De AI is geen bron. Elk cijfer komt uit een officiële publicatie die erbij genoemd staat, en de makers hebben die bron zelf nagelopen. De datum daarvan staat per onderdeel in het veld `gecontroleerdOp`. De rekenregels worden bij elke wijziging getoetst door `test.js`.
+De AI is geen bron. Bij elk cijfer staat de publicatie waar het uit komt, zodat iedereen het kan nalopen. Zo is het gecontroleerd:
 
-Vind je toch een fout, meld die dan via een issue (zie hierboven).
+- **Automatisch.** `test.js` toetst het rekenmodel aan een aantal officiële rekenvoorbeelden van Dienst Toeslagen en aan tabellen van de Belastingdienst. Dat dekt niet elke rekenregel afzonderlijk.
+- **Door de AI.** De datum in het veld `gecontroleerdOp` is de dag waarop de AI het cijfer uit de bron heeft overgenomen.
+- **Door de makers.** Wij lopen de cijfers zelf na naast de bron. Dat is nog niet voor alle cijfers gebeurd. Wat door een mens is nagekeken, schrijven we op in `CHANGELOG.md`.
+
+Niet elk cijfer komt uit een officiële publicatie. Een deel van de plannen voor 2027 komt uit vakpublicaties, omdat er nog geen officiële tabel is. De site rekent daar niet mee; zie `METHODOLOGIE.md`, punt 9.
+
+Vind je een fout, meld die dan via een issue (zie hierboven).
 
 ## Handleiding voor AI
 
@@ -108,7 +114,9 @@ De functie `bereken(invoer)` in `site/model.js` is de enige rekenfunctie. De inv
   aow: false,                // AOW-leeftijd bereikt
   partner: false, partnerInkomen: 0,
   kinderen: { k0tot5: 0, k6tot11: 0, k12tot15: 0, k16en17: 0 },
-  huur: 0                    // kale huur per maand, 0 = geen huurwoning
+  huur: 0,                   // kale huur per maand, 0 = geen huurwoning
+  woz: 0,                    // WOZ-waarde koophuis, 0 = geen koophuis
+  hypotheekrente: 0          // aftrekbare hypotheekrente per jaar
 }
 ```
 
@@ -118,7 +126,7 @@ De site vraagt bezoekers naar hun netto maandbedrag en zoekt daar het bruto jaar
 
 **Wat je de gebruiker eerlijk moet vertellen**
 
-- Dit is belastingjaar 2026, box 1. Spaargeld en beleggingen, pensioenpremie, hypotheekrente, btw en accijnzen zitten er niet in.
+- Dit is belastingjaar 2026, box 1. Spaargeld en beleggingen, pensioenpremie, btw en accijnzen zitten er niet in. Van de aftrekposten is alleen hypotheekrente meegenomen.
 - De plannen voor 2027 zijn nog niet allemaal definitief en de site rekent er niet mee.
 - De uitkomst is een benadering en geen belastingadvies. Zie `METHODOLOGIE.md` voor alle beperkingen.
 
