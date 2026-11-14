@@ -1,6 +1,7 @@
 // Controle van het rekenmodel tegen de officiële rekenvoorbeelden 2026 van Dienst Toeslagen
 // en tegen de tabellen van de Belastingdienst. Starten met: node test.js
-const B = require('./model.js');
+const B = require('./site/model.js');
+const D = require('./site/data.js');
 let fout = 0;
 function check(naam, gekregen, verwacht) {
   const ok = Math.abs(gekregen - verwacht) < 0.5;
@@ -35,5 +36,27 @@ for (const b of [0, 5000, 15000, 30000, 60000, 100000, 200000]) {
   check('Netto + heffing = bruto bij € ' + b, r.netto + r.heffingTotaal, b);
   if (r.inkomstenbelasting < 0) { fout++; console.log('FOUT negatieve belasting bij ' + b); }
 }
+
+// ---- Controles op de uitgavencijfers ----
+const som = (lijst) => lijst.reduce((a, x) => a + x.mld, 0);
+// De onderdelen zijn in de bron afgerond op 0,1 miljard: de som mag daardoor 0,1 afwijken van het officiële totaal.
+const afwijking = Math.abs(som(D.UITGAVEN) - D.UITGAVEN_TOTAAL);
+if (afwijking > 0.15) { fout++; console.log('FOUT uitgaven tellen op tot ' + som(D.UITGAVEN).toFixed(1) + ', officieel totaal is ' + D.UITGAVEN_TOTAAL); }
+else console.log('OK   Uitgaven tellen op tot ' + som(D.UITGAVEN).toFixed(1) + ' (officieel totaal ' + D.UITGAVEN_TOTAAL + ', verschil door afronding)');
+// Elk officieel onderdeel zit in precies één groep op de site
+const gebruikt = [].concat(...D.GROEPEN.map((g) => g.delen)).sort().join(',');
+const bestaand = D.UITGAVEN.map((u) => u.id).sort().join(',');
+if (gebruikt !== bestaand) { fout++; console.log('FOUT groepen en onderdelen komen niet overeen'); }
+else console.log('OK   Elk onderdeel zit in precies één groep');
+// De genoemde inkomstenposten zijn samen niet hoger dan het totaal
+if (som(D.INKOMSTEN) > D.INKOMSTEN_TOTAAL) { fout++; console.log('FOUT inkomstenposten zijn samen hoger dan het totaal'); }
+else console.log('OK   Inkomstenposten passen binnen het totaal');
+// Elke rij in de 2027-tabel met een bron verwijst naar een bestaande link
+for (const r of D.PLANNEN) if (r.bron && !D.BRON[r.bron]) { fout++; console.log('FOUT onbekende bron bij: ' + r.wat); }
+// De leesbare bestanden in data/ lopen gelijk met de cijfers op de site
+const uit = require('child_process').spawnSync(process.execPath, [require('path').join(__dirname, 'tools', 'exporteer-data.js'), '--controle'], { encoding: 'utf8' });
+process.stdout.write(uit.stdout);
+if (uit.status !== 0) fout++;
+
 console.log(fout ? fout + ' fout(en)' : 'Alle controles geslaagd');
 process.exit(fout ? 1 : 0);

@@ -1,0 +1,12 @@
+# Draait bij elke wijziging de rekencontroles. Slagen ze niet, dan hoort de wijziging niet in main.
+name: Rekencontroles
+on:
+  push:
+  pull_request:
+jobs:
+  controles:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rekenmodel en cijfers controleren
+        run: node test.js

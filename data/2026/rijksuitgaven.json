@@ -1,0 +1,287 @@
+{
+  "beschrijving": "Uitgaven en inkomsten van het Rijk in 2026, het aantal inwoners en de kosten per persoon die de site gebruikt.",
+  "jaar": 2026,
+  "gecontroleerdOp": "2026-11-14",
+  "eenheden": "mld = miljard euro. Kosten per persoon in euro.",
+  "inwoners": {
+    "aantal": 18130208,
+    "peildatum": "2026-01-01",
+    "bron": "https://opendata.cbs.nl/statline/#/CBS/nl/dataset/82905NED"
+  },
+  "uitgaven": {
+    "totaalMld": 486.3,
+    "opmerking": "De onderdelen zijn in de bron afgerond op 0,1 miljard en tellen daardoor op tot 486,4.",
+    "bron": "https://www.rijksoverheid.nl/binaries/rijksoverheid/documenten/begrotingen/2025/09/16/samenvatting-miljoenennota-2026/visuele-samenvatting-miljoenennota-2026.pdf",
+    "onderdelen": [
+      {
+        "id": "sociaal",
+        "naam": "Sociale zekerheid en arbeidsmarkt",
+        "mld": 124.7,
+        "uitleg": "AOW, arbeidsongeschiktheid, WW, bijstand, kinderbijslag, kindgebonden budget en kinderopvangtoeslag."
+      },
+      {
+        "id": "zorg",
+        "naam": "Zorg",
+        "mld": 119.5,
+        "uitleg": "Huisarts, ziekenhuis, medicijnen, verpleeghuizen en de zorgtoeslag."
+      },
+      {
+        "id": "gemeenten",
+        "naam": "Gemeenten en provincies",
+        "mld": 56.6,
+        "uitleg": "Gemeentefonds, Provinciefonds en Btw-compensatiefonds. Hieruit betalen gemeenten onder meer jeugdzorg, hulp thuis (Wmo), lokale wegen, sport en cultuur."
+      },
+      {
+        "id": "onderwijs",
+        "naam": "Onderwijs, cultuur en wetenschap",
+        "mld": 54.8,
+        "uitleg": "Basisscholen, middelbare scholen, mbo, hbo, universiteiten, studiefinanciering en cultuur."
+      },
+      {
+        "id": "defensie",
+        "naam": "Defensie",
+        "mld": 34.5,
+        "uitleg": "Krijgsmacht en materieel."
+      },
+      {
+        "id": "justitie",
+        "naam": "Justitie en veiligheid",
+        "mld": 16.8,
+        "uitleg": "Politie, rechtspraak en gevangenissen."
+      },
+      {
+        "id": "buitenland",
+        "naam": "Buitenlandse zaken en ontwikkelingshulp",
+        "mld": 15.5,
+        "uitleg": "Ambassades, afdrachten aan de Europese Unie en ontwikkelingssamenwerking."
+      },
+      {
+        "id": "infra",
+        "naam": "Infrastructuur en waterstaat",
+        "mld": 14.9,
+        "uitleg": "Rijkswegen, spoor, dijken en waterbeheer."
+      },
+      {
+        "id": "rente",
+        "naam": "Rente op de staatsschuld",
+        "mld": 9.5,
+        "uitleg": "Rentelasten van de staat."
+      },
+      {
+        "id": "asiel",
+        "naam": "Asiel en migratie",
+        "mld": 8.9,
+        "uitleg": "Opvang, asielprocedures en migratiebeleid."
+      },
+      {
+        "id": "wonen",
+        "naam": "Volkshuisvesting en ruimtelijke ordening",
+        "mld": 8.8,
+        "uitleg": "Woningbouw, ruimtelijke ordening en de huurtoeslag."
+      },
+      {
+        "id": "landbouw",
+        "naam": "Landbouw, visserij, voedselzekerheid en natuur",
+        "mld": 4.2,
+        "uitleg": ""
+      },
+      {
+        "id": "klimaat",
+        "naam": "Klimaat en groene groei",
+        "mld": 4.1,
+        "uitleg": ""
+      },
+      {
+        "id": "financien",
+        "naam": "Financiën",
+        "mld": 3.5,
+        "uitleg": "Onder meer de Belastingdienst."
+      },
+      {
+        "id": "bzk",
+        "naam": "Binnenlandse zaken en Koninkrijksrelaties",
+        "mld": 3,
+        "uitleg": ""
+      },
+      {
+        "id": "ez",
+        "naam": "Economische zaken",
+        "mld": 2.9,
+        "uitleg": ""
+      },
+      {
+        "id": "overig",
+        "naam": "Overig",
+        "mld": 4.2,
+        "uitleg": ""
+      }
+    ]
+  },
+  "groepenOpDeSite": {
+    "opmerking": "Eigen indeling van de site: officiële onderdelen samengevoegd tot begrijpelijke groepen. \"delen\" verwijst naar de id van de onderdelen hierboven.",
+    "groepen": [
+      {
+        "id": "zorg",
+        "naam": "Zorg",
+        "delen": [
+          "zorg"
+        ],
+        "uitleg": "De huisarts, het ziekenhuis, medicijnen en het verpleeghuis."
+      },
+      {
+        "id": "sociaal",
+        "naam": "AOW en vangnet",
+        "delen": [
+          "sociaal"
+        ],
+        "uitleg": "AOW als je oud bent. Geld als je ziek wordt of je baan verliest. En kinderbijslag."
+      },
+      {
+        "id": "gemeenten",
+        "naam": "Je gemeente",
+        "delen": [
+          "gemeenten"
+        ],
+        "uitleg": "Jeugdzorg, hulp thuis, straten, sportvelden en de bibliotheek."
+      },
+      {
+        "id": "onderwijs",
+        "naam": "School en studie",
+        "delen": [
+          "onderwijs"
+        ],
+        "uitleg": "De basisschool, de middelbare school, mbo, hbo en universiteit."
+      },
+      {
+        "id": "veiligheid",
+        "naam": "Veiligheid",
+        "delen": [
+          "defensie",
+          "justitie"
+        ],
+        "uitleg": "Het leger, de politie, rechters en gevangenissen."
+      },
+      {
+        "id": "buitenland",
+        "naam": "Buitenland en Europa",
+        "delen": [
+          "buitenland"
+        ],
+        "uitleg": "Wat Nederland aan de Europese Unie betaalt, ambassades en ontwikkelingshulp."
+      },
+      {
+        "id": "infra",
+        "naam": "Wegen, spoor en dijken",
+        "delen": [
+          "infra"
+        ],
+        "uitleg": "Snelwegen, treinsporen en bescherming tegen het water."
+      },
+      {
+        "id": "rente",
+        "naam": "Rente op schulden",
+        "delen": [
+          "rente"
+        ],
+        "uitleg": "De rente die Nederland betaalt over geleend geld."
+      },
+      {
+        "id": "asiel",
+        "naam": "Asiel en migratie",
+        "delen": [
+          "asiel"
+        ],
+        "uitleg": "Opvang van asielzoekers en het behandelen van aanvragen."
+      },
+      {
+        "id": "wonen",
+        "naam": "Wonen",
+        "delen": [
+          "wonen"
+        ],
+        "uitleg": "Huurtoeslag en het bouwen van woningen."
+      },
+      {
+        "id": "rest",
+        "naam": "Al het andere",
+        "delen": [
+          "landbouw",
+          "klimaat",
+          "financien",
+          "bzk",
+          "ez",
+          "overig"
+        ],
+        "uitleg": "Landbouw en natuur, klimaat, de Belastingdienst en de rest van de overheid."
+      }
+    ]
+  },
+  "inkomsten": {
+    "totaalMld": 451.4,
+    "opmerking": "De site toont daarnaast een post \"Overige belastingen\": het totaal min de genoemde posten.",
+    "bron": "https://www.rijksoverheid.nl/binaries/rijksoverheid/documenten/begrotingen/2025/09/16/samenvatting-miljoenennota-2026/visuele-samenvatting-miljoenennota-2026.pdf",
+    "posten": [
+      {
+        "naam": "Loon- en inkomstenbelasting",
+        "mld": 110.3
+      },
+      {
+        "naam": "Btw",
+        "mld": 87.8
+      },
+      {
+        "naam": "Zorgpremies",
+        "mld": 61.4
+      },
+      {
+        "naam": "Winstbelasting bedrijven (vennootschapsbelasting)",
+        "mld": 49.7
+      },
+      {
+        "naam": "Premies volksverzekeringen (AOW, Anw, Wlz)",
+        "mld": 44.9
+      },
+      {
+        "naam": "Premies werknemersverzekeringen (WW, WIA)",
+        "mld": 43.5
+      },
+      {
+        "naam": "Accijnzen",
+        "mld": 11.5
+      }
+    ]
+  },
+  "kostenPerPersoon": {
+    "zorg": {
+      "waarden": {
+        "k0tot20": 1630,
+        "gemiddeld": 3263,
+        "k60tot80": 5326
+      },
+      "wat": "Gemiddelde kosten basisverzekering per persoon per jaar naar leeftijd, 2024 (voorlopig).",
+      "bron": "https://opendata.cbs.nl/statline/#/CBS/nl/dataset/85660NED"
+    },
+    "onderwijs": {
+      "waarden": {
+        "primair": 11500,
+        "voortgezet": 13700,
+        "mbo": 12400
+      },
+      "wat": "Rijksbekostiging per leerling per jaar, 2026.",
+      "bron": "https://www.rijksfinancien.nl/memorie-van-toelichting/2027/OWB/VIII"
+    },
+    "aow": {
+      "waarden": {
+        "alleenstaand": 1766.94,
+        "samenwonend": 1214.24
+      },
+      "wat": "AOW bruto per maand vanaf 1 juli 2026, inclusief vakantiegeld.",
+      "bron": "https://www.svb.nl/nl/aow/bedragen-aow/aow-bedragen"
+    },
+    "zorgCollectiefPerVolwassene": {
+      "waarde": 7369,
+      "wat": "Wat een volwassene in 2026 gemiddeld betaalt aan collectief gefinancierde zorg.",
+      "bron": "https://www.rijksfinancien.nl/memorie-van-toelichting/2027/OWB/XVI"
+    }
+  }
+}

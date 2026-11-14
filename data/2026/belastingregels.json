@@ -1,0 +1,162 @@
+{
+  "beschrijving": "Tarieven, kortingen, premies en toeslagregels voor belastingjaar 2026, zoals het rekenmodel ze gebruikt.",
+  "jaar": 2026,
+  "gecontroleerdOp": "2026-11-14",
+  "eenheden": "Bedragen in euro per jaar, tenzij de naam of de toelichting iets anders zegt. Percentages als breuk (0.3575 = 35,75%).",
+  "toelichting": {
+    "ak": "Arbeidskorting: rijen van [ondergrens arbeidsinkomen, basisbedrag, percentage over het meerdere].",
+    "akAow": "Arbeidskorting voor wie de AOW-leeftijd heeft.",
+    "kb": "Kinderbijslag per kind per kwartaal: [1e en 2e kwartaal, 3e en 4e kwartaal].",
+    "ht": "Huurtoeslag: bedragen per maand, ijkpunten per jaar.",
+    "zt": "Zorgtoeslag: standaardpremie en inkomensgrenzen per jaar.",
+    "kgb": "Kindgebonden budget: bedragen per jaar."
+  },
+  "regels": {
+    "jaar": 2026,
+    "schijf1Grens": 38883,
+    "schijf2Grens": 78426,
+    "tarief1": 0.3575,
+    "tarief1Aow": 0.1785,
+    "tarief2": 0.3756,
+    "tarief3": 0.495,
+    "premieAow": 0.179,
+    "premieAnw": 0.001,
+    "premieWlz": 0.0965,
+    "belastingSchijf1": 0.081,
+    "ahkMax": 3115,
+    "ahkMaxAow": 1556,
+    "ahkAfbouwStart": 29736,
+    "ahkAfbouw": 0.06398,
+    "ahkAfbouwAow": 0.03195,
+    "ak": [
+      [
+        0,
+        0,
+        0.08324
+      ],
+      [
+        11965,
+        996,
+        0.31009
+      ],
+      [
+        25845,
+        5300,
+        0.0195
+      ],
+      [
+        45592,
+        5685,
+        -0.0651
+      ]
+    ],
+    "akAow": [
+      [
+        0,
+        0,
+        0.04156
+      ],
+      [
+        11965,
+        498,
+        0.15483
+      ],
+      [
+        25845,
+        2647,
+        0.00974
+      ],
+      [
+        45592,
+        2840,
+        -0.0325
+      ]
+    ],
+    "akEinde": 132920,
+    "iackDrempel": 6239,
+    "iackPct": 0.1145,
+    "iackMax": 3032,
+    "iackPctAow": 0.0572,
+    "iackMaxAow": 1513,
+    "okMax": 2067,
+    "okAfbouwStart": 46002,
+    "okAfbouw": 0.15,
+    "alleenstaandeOuderenkorting": 540,
+    "zvwWerkgever": 0.061,
+    "zvwZelf": 0.0485,
+    "zvwMaxInkomen": 79409,
+    "zorgpremieGemiddeld": 1884,
+    "eigenRisico": 385,
+    "zelfstandigenaftrek": 1200,
+    "startersaftrek": 2123,
+    "mkbVrijstelling": 0.127,
+    "maxAftrekTarief": 0.3756,
+    "wwLaag": 0.0274,
+    "aofLaag": 0.0627,
+    "aofHoog": 0.0763,
+    "wko": 0.005,
+    "whkGemiddeld": 0.0152,
+    "zt": {
+      "drempel": 29736,
+      "afbouw": 0.1373,
+      "alleen": {
+        "standaardpremie": 2119,
+        "pct": 0.01912,
+        "maxInkomen": 40857
+      },
+      "partner": {
+        "standaardpremie": 4238,
+        "pct": 0.04289,
+        "maxInkomen": 51142
+      }
+    },
+    "kgb": {
+      "perKind": 2580,
+      "alleenstaandeOuderKop": 3416,
+      "extra12tot15": 724,
+      "extra16en17": 964,
+      "afbouw": 0.076,
+      "grensAlleen": 29736,
+      "grensPartner": 39141
+    },
+    "kb": {
+      "k0tot5": [
+        295.07,
+        298.4
+      ],
+      "k6tot11": [
+        358.3,
+        362.35
+      ],
+      "k12tot17": [
+        421.53,
+        426.29
+      ]
+    },
+    "ht": {
+      "huurgrens": 932.93,
+      "kwaliteitskortingsgrens": 498.2,
+      "basishuur1": 202.52,
+      "basishuurMeer": 200.71,
+      "aftop12": 713.02,
+      "aftop3plus": 764.14,
+      "ijkpunt1": 23425,
+      "ijkpuntMeer": 31500,
+      "afbouw1": 0.27,
+      "afbouwMeer": 0.22
+    }
+  },
+  "bronnen": {
+    "loonheffingen": "https://download.belastingdienst.nl/belastingdienst/docs/bijlage-nieuwsbrief-loonheffingen-2026-lh2091b63fd.pdf",
+    "box1": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/boxen_en_tarieven/box_1/box_1",
+    "ahk": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/algemene_heffingskorting/tabel-algemene-heffingskorting-2026",
+    "arbeidskorting": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/inkomstenbelasting/heffingskortingen_boxen_tarieven/heffingskortingen/arbeidskorting/tabel-arbeidskorting-2026",
+    "zvw": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/prive/werk_en_inkomen/zorgverzekeringswet/veranderingen-bijdrage-zvw/percentages-zvw",
+    "zelfstandigenaftrek": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/winst/inkomstenbelasting/veranderingen-inkomstenbelasting-2026/ondernemersaftrek-2026/zelfstandigenaftrek-2026",
+    "zorgtoeslag": "https://download.belastingdienst.nl/toeslagen/docs/berekening_zorgtoeslag_tg0821z61fd.pdf",
+    "kindgebondenBudget": "https://download.belastingdienst.nl/toeslagen/docs/berekening_kindgebonden_budget_tg0811z61fd.pdf",
+    "huurtoeslag": "https://download.belastingdienst.nl/toeslagen/docs/berekening_huurtoeslag_tg0831z61fd.pdf",
+    "kinderbijslag": "https://www.svb.nl/nl/kinderbijslag/bedragen-betaaldagen/bedragen-kinderbijslag",
+    "zorgpremie": "https://www.rijksoverheid.nl/onderwerpen/zorgverzekering/vraag-en-antwoord/premie-zorgverzekering"
+  }
+}
