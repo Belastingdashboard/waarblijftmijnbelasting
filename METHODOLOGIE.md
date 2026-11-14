@@ -36,7 +36,8 @@ Ben je het met een keuze oneens? Meld het via een [issue](https://github.com/Bel
 
 - Vakantiegeld en een dertiende maand tellen niet mee. Het echte jaarinkomen is daardoor meestal hoger.
 - Pensioenpremie is niet meegenomen. "Bruto" is hier het loon waarover belasting wordt berekend, niet het brutoloon vóór pensioenpremie.
-- Aftrekposten zoals hypotheekrente zijn niet meegenomen.
+- Andere aftrekposten dan hypotheekrente, zoals giften en zorgkosten, zijn niet meegenomen.
+- Heb je een koophuis, dan zoeken we het brutoloon op alsof je geen huis had. Het voordeel van de hypotheekrente staat namelijk niet op je loonstrook; je krijgt het van de Belastingdienst. Wie dat voordeel per maand laat uitbetalen en het meetelt in het ingevulde bedrag, krijgt een te hoog brutoloon te zien.
 
 **Alternatief.** Vragen naar het bruto jaarloon. Dat kan op de site ook, maar veel mensen kennen dat bedrag niet.
 
@@ -96,6 +97,7 @@ Ben je het met een keuze oneens? Meld het via een [issue](https://github.com/Bel
 - **Toeslagen.** Geen toets op vermogen. Kinderopvangtoeslag is niet meegenomen. Bij huurtoeslag is geen rekening gehouden met servicekosten of bijzondere situaties.
 - **Afronding.** Zorgtoeslag, kindgebonden budget en huurtoeslag worden per maand naar beneden afgerond op hele euro's, zoals Dienst Toeslagen doet.
 - **AOW-leeftijd.** Wie dit aanvinkt, wordt voor het hele jaar als AOW-gerechtigd gezien.
+- **Koophuis.** Het eigenwoningforfait telt bij het inkomen op en de hypotheekrente gaat eraf. Is het forfait hoger dan de rente, dan is 71,867% van het verschil aftrekbaar. In de hoogste schijf levert de rente maximaal 37,56% op. Het hele huis en alle rente rekenen we toe aan de invuller, ook met een partner; in werkelijkheid mogen partners dit verdelen. We gaan ervan uit dat alle ingevulde rente aftrekbaar is. Erfpacht, financieringskosten en een restschuld zijn niet meegenomen.
 - **Eigen bedrijf.** Een eenmanszaak of vof, geen bv. Alleen zelfstandigenaftrek, startersaftrek en mkb-winstvrijstelling zijn meegenomen.
 - **Werkgeverspremies.** De premie Whk verschilt per werkgever; het model gebruikt het gemiddelde percentage.
 - **Heffingskortingen** kunnen de belasting niet lager dan nul maken.

@@ -30,6 +30,19 @@ check('Heffingskorting bij € 29.736', B.algemeneHeffingskorting(29736, B.P2026
 check('Heffingskorting bij € 78.427', B.algemeneHeffingskorting(78427, B.P2026), 0);
 // Maximale Zvw-bijdrage ondernemer: 4,85% x € 79.409
 check('Maximale Zvw-bijdrage', B.bereken({ type: 'ondernemer', omzet: 200000, kosten: 0, urencriterium: true }).zvwZelf, 3851.34);
+// Eigenwoningforfait (Belastingdienst): WOZ € 280.000 x 0,35% = € 980
+check('Eigenwoningforfait bij WOZ € 280.000', B.eigenwoningforfait(280000, B.P2026), 980);
+check('Eigenwoningforfait bij WOZ € 1.350.000', B.eigenwoningforfait(1350000, B.P2026), 4725);
+check('Eigenwoningforfait bij WOZ € 1.450.000', B.eigenwoningforfait(1450000, B.P2026), 4725 + 2350);
+// Aftrek geen of kleine eigenwoningschuld (Fiscale informatie 2026, 10.4.5): forfait € 1.500, rente € 1.200 -> aftrek € 216
+// Een WOZ-waarde van 1.500 / 0,35% geeft precies dat forfait.
+const hw = loon(40000, { woz: 1500 / 0.0035, hypotheekrente: 1200 }).woning;
+check('Forfait in voorbeeld geringe schuld', hw.forfait, 1500);
+check('Aftrek geen of kleine eigenwoningschuld', hw.aftrekGeringeSchuld, 216);
+// Hypotheekrente verlaagt het belastbaar inkomen met (rente - forfait)
+check('Belastbaar inkomen met koophuis', loon(50000, { woz: 280000, hypotheekrente: 6000 }).belastbaarInkomen, 50000 + 980 - 6000);
+// Zonder koophuis verandert er niets
+check('Geen koophuis: zelfde belasting', loon(50000, { woz: 0, hypotheekrente: 6000 }).heffingTotaal, loon(50000).heffingTotaal);
 // Samenhang: netto + heffing = bruto, en nooit negatieve belasting
 for (const b of [0, 5000, 15000, 30000, 60000, 100000, 200000]) {
   const r = loon(b);

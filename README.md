@@ -114,7 +114,9 @@ De functie `bereken(invoer)` in `site/model.js` is de enige rekenfunctie. De inv
   aow: false,                // AOW-leeftijd bereikt
   partner: false, partnerInkomen: 0,
   kinderen: { k0tot5: 0, k6tot11: 0, k12tot15: 0, k16en17: 0 },
-  huur: 0                    // kale huur per maand, 0 = geen huurwoning
+  huur: 0,                   // kale huur per maand, 0 = geen huurwoning
+  woz: 0,                    // WOZ-waarde koophuis, 0 = geen koophuis
+  hypotheekrente: 0          // aftrekbare hypotheekrente per jaar
 }
 ```
 
@@ -124,7 +126,7 @@ De site vraagt bezoekers naar hun netto maandbedrag en zoekt daar het bruto jaar
 
 **Wat je de gebruiker eerlijk moet vertellen**
 
-- Dit is belastingjaar 2026, box 1. Spaargeld en beleggingen, pensioenpremie, hypotheekrente, btw en accijnzen zitten er niet in.
+- Dit is belastingjaar 2026, box 1. Spaargeld en beleggingen, pensioenpremie, btw en accijnzen zitten er niet in. Van de aftrekposten is alleen hypotheekrente meegenomen.
 - De plannen voor 2027 zijn nog niet allemaal definitief en de site rekent er niet mee.
 - De uitkomst is een benadering en geen belastingadvies. Zie `METHODOLOGIE.md` voor alle beperkingen.
 

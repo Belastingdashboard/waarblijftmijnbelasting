@@ -18,7 +18,9 @@ const bestanden = {
       kb: 'Kinderbijslag per kind per kwartaal: [1e en 2e kwartaal, 3e en 4e kwartaal].',
       ht: 'Huurtoeslag: bedragen per maand, ijkpunten per jaar.',
       zt: 'Zorgtoeslag: standaardpremie en inkomensgrenzen per jaar.',
-      kgb: 'Kindgebonden budget: bedragen per jaar.'
+      kgb: 'Kindgebonden budget: bedragen per jaar.',
+      ewf: 'Eigenwoningforfait: rijen van [WOZ-waarde meer dan, percentage over de hele WOZ-waarde]. Boven ewfGrensHoog: ewfBedragHoog plus ewfPctBovenGrens over het meerdere.',
+      hillenPct: 'Aftrek wegens geen of geringe eigenwoningschuld: dit deel van (forfait min aftrekbare rente) is aftrekbaar.'
     },
     regels: B.P2026,
     bronnen: B.BRONNEN

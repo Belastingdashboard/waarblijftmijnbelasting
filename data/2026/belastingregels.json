@@ -9,7 +9,9 @@
     "kb": "Kinderbijslag per kind per kwartaal: [1e en 2e kwartaal, 3e en 4e kwartaal].",
     "ht": "Huurtoeslag: bedragen per maand, ijkpunten per jaar.",
     "zt": "Zorgtoeslag: standaardpremie en inkomensgrenzen per jaar.",
-    "kgb": "Kindgebonden budget: bedragen per jaar."
+    "kgb": "Kindgebonden budget: bedragen per jaar.",
+    "ewf": "Eigenwoningforfait: rijen van [WOZ-waarde meer dan, percentage over de hele WOZ-waarde]. Boven ewfGrensHoog: ewfBedragHoog plus ewfPctBovenGrens over het meerdere.",
+    "hillenPct": "Aftrek wegens geen of geringe eigenwoningschuld: dit deel van (forfait min aftrekbare rente) is aftrekbaar."
   },
   "regels": {
     "jaar": 2026,
@@ -91,6 +93,32 @@
     "startersaftrek": 2123,
     "mkbVrijstelling": 0.127,
     "maxAftrekTarief": 0.3756,
+    "ewf": [
+      [
+        0,
+        0
+      ],
+      [
+        12500,
+        0.001
+      ],
+      [
+        25000,
+        0.002
+      ],
+      [
+        50000,
+        0.0025
+      ],
+      [
+        75000,
+        0.0035
+      ]
+    ],
+    "ewfGrensHoog": 1350000,
+    "ewfBedragHoog": 4725,
+    "ewfPctBovenGrens": 0.0235,
+    "hillenPct": 0.71867,
     "wwLaag": 0.0274,
     "aofLaag": 0.0627,
     "aofHoog": 0.0763,
@@ -157,6 +185,8 @@
     "kindgebondenBudget": "https://download.belastingdienst.nl/toeslagen/docs/berekening_kindgebonden_budget_tg0811z61fd.pdf",
     "huurtoeslag": "https://download.belastingdienst.nl/toeslagen/docs/berekening_huurtoeslag_tg0831z61fd.pdf",
     "kinderbijslag": "https://www.svb.nl/nl/kinderbijslag/bedragen-betaaldagen/bedragen-kinderbijslag",
-    "zorgpremie": "https://www.rijksoverheid.nl/onderwerpen/zorgverzekering/vraag-en-antwoord/premie-zorgverzekering"
+    "zorgpremie": "https://www.rijksoverheid.nl/onderwerpen/zorgverzekering/vraag-en-antwoord/premie-zorgverzekering",
+    "eigenWoning": "https://www.belastingdienst.nl/wps/wcm/connect/fisin/fisin2026/eigen_woning_en_restschuld_vroegere",
+    "eigenwoningforfait": "https://www.belastingdienst.nl/wps/wcm/connect/nl/koopwoning/content/hoe-werkt-eigenwoningforfait"
   }
 }
