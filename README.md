@@ -29,6 +29,7 @@ De makers betalen de site zelf, uit eigen zak. Er zijn geen sponsors, advertenti
 | `data/` | Dezelfde cijfers als leesbare JSON, per jaar, met bron per onderdeel. |
 | `test.js` | De rekencontroles. |
 | `tools/exporteer-data.js` | Maakt de bestanden in `data/` opnieuw uit de cijfers van de site. |
+| `tools/serve.js` | Kleine lokale server om de site op je eigen computer te bekijken. |
 | `buitenland/` | Werk in uitvoering: vergelijking met andere landen. Staat niet op de site. |
 | `METHODOLOGIE.md` | Welke keuzes en aannames er gemaakt zijn, en wat het alternatief was. |
 | `CHANGELOG.md` | Elke wijziging in cijfers of methode. |
@@ -38,15 +39,19 @@ De makers betalen de site zelf, uit eigen zak. Er zijn geen sponsors, advertenti
 
 Je hebt alleen [Node.js](https://nodejs.org) nodig. Er zijn geen pakketten om te installeren.
 
+De rekencontroles draaien:
+
 ```bash
 node test.js
 ```
 
+De site op je eigen computer bekijken:
+
 ```bash
-node .claude/serve.js
+node tools/serve.js
 ```
 
-De site staat daarna op http://localhost:8765.
+De site staat daarna op http://localhost:8765. De server is alleen vanaf je eigen computer bereikbaar.
 
 ## Een cijfer wijzigen
 
@@ -60,6 +65,14 @@ De controles draaien ook automatisch op GitHub bij elke wijziging.
 ## Een fout melden
 
 Zie je een cijfer of berekening die niet klopt? Maak een [issue](https://github.com/Belastingdashboard/waarblijftmijnbelasting/issues) aan en noem het cijfer, wat het volgens jou moet zijn en de bron.
+
+## Hoe AI is gebruikt
+
+Bij het bouwen van deze site is een AI-assistent (Claude Code) gebruikt voor de code, de teksten en de indeling van deze repo.
+
+De AI is geen bron. Elk cijfer komt uit een officiële publicatie die erbij genoemd staat, en de makers hebben die bron zelf nagelopen. De datum daarvan staat per onderdeel in het veld `gecontroleerdOp`. De rekenregels worden bij elke wijziging getoetst door `test.js`.
+
+Vind je toch een fout, meld die dan via een issue (zie hierboven).
 
 ## Handleiding voor AI
 
