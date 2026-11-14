@@ -12,9 +12,11 @@ Alles in deze repo is openbaar zodat iedereen het kan narekenen: de cijfers, de 
 - **Niets wordt opgeslagen.** De berekening gebeurt in de browser van de bezoeker. Er zijn geen cookies, geen trackers en geen verzoeken naar andere servers.
 - **Geen bouwstap.** De site bestaat uit losse bestanden die je zo kunt openen en lezen.
 
-## Wie zit hierachter en wie betaalt het
+## Wie zit hierachter
 
-*Nog in te vullen door de makers.*
+Glenn en Marit Stringer-Smit. Twee enthousiastelingen die vinden dat het eenvoudiger moet zijn om te zien wat belastingwetten echt betekenen voor jouw eigen situatie.
+
+Hoe de site wordt betaald: *nog in te vullen door de makers.*
 
 ## Wat staat waar
 
