@@ -234,7 +234,8 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
   <section class="card" aria-labelledby="h3">
     <div class="steps"><i class="on"></i><i class="on"></i><i class="on"></i></div>
     <div class="tagrow"><span class="nr">03</span><span class="pill">Dit krijg je ervoor</span></div>
-    <h2 id="h3">Waar gaat elke € 100 belasting heen?</h2>
+    <h2 id="h3">Waar gaat jouw belasting heen?</h2>
+    <p id="verdeel"></p>
     <p class="soft">Zet een schuifje uit en kijk wat er gebeurt als de overheid ermee stopt. Wat houd je over? En wat betaal je dan zelf?</p>
     <div id="cats"></div>
     <details>
@@ -480,11 +481,16 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
       : 'Met een eigen bedrijf ben je niet verzekerd als je ziek wordt of geen werk hebt. Je betaalt daar ook geen premie voor.';
 
     [].forEach.call($('cats').querySelectorAll('details[data-g]'),function(d){ open[d.getAttribute('data-g')] = d.open; });
+    var betaalt = r.heffingTotaal >= 6; // minder dan 50 cent per maand tonen we als geen belasting
+    $('verdeel').innerHTML = betaalt
+      ? 'Je betaalt <b>'+M(r.heffingTotaal)+'</b> per maand. Zo wordt dat verdeeld.'
+      : 'Je betaalt nu geen belasting over je '+(zzp?'winst':'loon')+'. Zo verdeelt de overheid elke € 100 die ze uitgeeft.';
     var max = groepen[0].mld, c = '', bespaar = 0, betaal = 0, n = 0;
     groepen.forEach(function(g){
       var aandeel = g.mld/totaal, jouw = r.heffingTotaal*aandeel, off = !!uit[g.id];
       c += '<div class="item'+(off?' off':'')+'"><div class="top"><div class="t"><h3>'+g.naam+'</h3><div class="soft small">'+g.uitleg+'</div></div>'
-        + '<div class="coin"><b>€ '+Math.round(aandeel*100)+'</b><span>van elke € 100</span></div></div>'
+        + (betaalt ? '<div class="coin"><b>'+M(jouw)+'</b><span>per maand</span></div></div>'
+                   : '<div class="coin"><b>€ '+Math.round(aandeel*100)+'</b><span>van elke € 100</span></div></div>')
         + '<div class="meter"><i style="width:'+(g.mld/max*100)+'%"></i></div>'
         + '<label class="stop"><span class="switch"><input type="checkbox" data-id="'+g.id+'"'+(off?'':' checked')+'><span></span></span>'
         + '<span>'+(off?'De overheid is hiermee gestopt':'De overheid betaalt dit')+'</span></label>';
@@ -495,7 +501,7 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
           + '<p>'+z.zin+'</p>';
       }
       c += '<details data-g="'+g.id+'"'+(open[g.id]?' open':'')+'><summary>Meer hierover</summary><div class="inner small">'
-        + '<p>Van jouw belasting gaat hier '+M(jouw)+' per maand naartoe.</p>'
+        + '<p>Van elke € 100 belasting gaat hier € '+Math.round(aandeel*100)+' naartoe.'+(betaalt ? ' Voor jou is dat '+M(jouw)+' per maand.' : '')+'</p>'
         + '<p>De overheid geeft hier in 2026 '+num1.format(g.mld)+' miljard euro aan uit'
         + (g.delen.length>1 ? ': '+g.delen.map(function(id){ return deel[id].naam.toLowerCase()+' ('+num1.format(deel[id].mld)+' miljard)'; }).join(', ') : '')+'.</p>'
         + (off ? '<p>'+zelf(g, inv, r).som+'</p>' : '')
