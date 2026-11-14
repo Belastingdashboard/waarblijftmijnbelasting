@@ -16,7 +16,7 @@ Alles in deze repo is openbaar zodat iedereen het kan narekenen: de cijfers, de 
 
 Glenn en Marit Stringer-Smit. Twee enthousiastelingen die vinden dat het eenvoudiger moet zijn om te zien wat belastingwetten echt betekenen voor jouw eigen situatie.
 
-Hoe de site wordt betaald: *nog in te vullen door de makers.*
+De makers betalen de site zelf, uit eigen zak. Er zijn geen sponsors, advertenties of subsidies.
 
 ## Wat staat waar
 
@@ -32,6 +32,7 @@ Hoe de site wordt betaald: *nog in te vullen door de makers.*
 | `buitenland/` | Werk in uitvoering: vergelijking met andere landen. Staat niet op de site. |
 | `METHODOLOGIE.md` | Welke keuzes en aannames er gemaakt zijn, en wat het alternatief was. |
 | `CHANGELOG.md` | Elke wijziging in cijfers of methode. |
+| `LICENSE` | De licentie voor de code (EUPL-1.2). |
 
 ## Zelf draaien
 
@@ -110,7 +111,13 @@ De site vraagt bezoekers naar hun netto maandbedrag en zoekt daar het bruto jaar
 
 ## Licentie
 
-*Nog te kiezen door de makers.* Zolang hier geen licentie staat, geldt het gewone auteursrecht en mag de code niet zonder toestemming worden hergebruikt.
+Je mag alles in deze repo gebruiken, aanpassen en verder verspreiden. De voorwaarde is dat wat je ermee maakt ook open blijft, onder dezelfde voorwaarden.
+
+- **Code:** [EUPL-1.2](LICENSE), de open-sourcelicentie van de Europese Commissie. Er is ook een [officiële Nederlandse tekst](https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12).
+- **Teksten en de indeling van de cijfers:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.nl). Noem bij hergebruik "waarblijftmijnbelasting.nl" als bron.
+- **De cijfers van de overheid zelf** zijn feiten uit openbare bronnen. Daar geldt deze licentie niet voor; zie de bron per cijfer.
+
+© 2026 Glenn en Marit Stringer-Smit
 
 ## English summary
 
