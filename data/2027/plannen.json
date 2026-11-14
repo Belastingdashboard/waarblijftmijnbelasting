@@ -1,0 +1,145 @@
+{
+  "beschrijving": "Plannen voor 2027 naast de regels van 2026. De site rekent hier NIET mee; het is alleen een vergelijkingstabel.",
+  "gecontroleerdOp": "2026-11-14",
+  "statussen": {
+    "vast": "Officieel vastgesteld.",
+    "tk": "Aangenomen door de Tweede Kamer op 12 november 2026; de Eerste Kamer moet nog stemmen.",
+    "voorstel": "Wetsvoorstel dat nog niet is aangenomen.",
+    "raming": "Raming of bericht; nog niet definitief.",
+    "onbekend": "Niet gevonden in een officiële bron."
+  },
+  "letOp": "Een deel van deze rijen komt uit vakpublicaties en niet uit een officiële tabel, omdat die na de amendementen nog niet is gepubliceerd. Zie per rij het veld \"bron\" en \"noot\".",
+  "plannen": [
+    {
+      "wat": "Tarief eerste schijf",
+      "nu": "35,75%",
+      "straks": "35,84%",
+      "status": "tk",
+      "bron": "https://www.meijburg.nl/nieuws/pakket-belastingplan-2027-en-novelle-uitbreiding-vermogenswinstbelasting-box-3-aangenomen"
+    },
+    {
+      "wat": "Tarief tweede schijf",
+      "nu": "37,56%",
+      "straks": "38,02%",
+      "status": "tk",
+      "bron": "https://www.meijburg.nl/nieuws/pakket-belastingplan-2027-en-novelle-uitbreiding-vermogenswinstbelasting-box-3-aangenomen"
+    },
+    {
+      "wat": "Toptarief",
+      "nu": "49,50%",
+      "straks": "49,50%",
+      "status": "tk",
+      "bron": "https://www.rijksfinancien.nl/sites/default/files/bestanden/belastingplan-2027/pakket-belastingplan-2027/Fiscale-sleuteltabel-2027-incl-correctie-tarieven-energiebelasting-zelfstandigenaftrek.pdf"
+    },
+    {
+      "wat": "Toptarief geldt vanaf",
+      "nu": "€ 78.426",
+      "straks": "€ 80.578 of € 80.819",
+      "status": "tk",
+      "bron": "https://www.meijburg.nl/nieuws/pakket-belastingplan-2027-en-novelle-uitbreiding-vermogenswinstbelasting-box-3-aangenomen",
+      "noot": "Twee vakbronnen noemen een verschillend bedrag; een officiële tabel na de amendementen is er nog niet."
+    },
+    {
+      "wat": "Algemene heffingskorting (maximum)",
+      "nu": "€ 3.115",
+      "straks": "€ 3.163",
+      "status": "tk",
+      "bron": "https://www.meijburg.nl/nieuws/pakket-belastingplan-2027-en-novelle-uitbreiding-vermogenswinstbelasting-box-3-aangenomen"
+    },
+    {
+      "wat": "Arbeidskorting (maximum)",
+      "nu": "€ 5.685",
+      "straks": "€ 5.790",
+      "status": "tk",
+      "bron": "https://www.meijburg.nl/nieuws/pakket-belastingplan-2027-en-novelle-uitbreiding-vermogenswinstbelasting-box-3-aangenomen",
+      "noot": "Alleen het maximum is bekend. De volledige tabel na de amendementen is niet gepubliceerd."
+    },
+    {
+      "wat": "Zelfstandigenaftrek",
+      "nu": "€ 1.200",
+      "straks": "€ 900",
+      "status": "tk",
+      "bron": "https://www.rijksfinancien.nl/sites/default/files/bestanden/belastingplan-2027/pakket-belastingplan-2027/Fiscale-sleuteltabel-2027-incl-correctie-tarieven-energiebelasting-zelfstandigenaftrek.pdf"
+    },
+    {
+      "wat": "Startersaftrek",
+      "nu": "€ 2.123",
+      "straks": "€ 10 (vervalt in 2028)",
+      "status": "tk",
+      "bron": "https://www.sra.nl/nieuws/000000/2026/11/belastingplannen-2027-wat-staat-nog-overeind-in-de-inkomstenbelasting"
+    },
+    {
+      "wat": "Mkb-winstvrijstelling",
+      "nu": "12,7%",
+      "straks": "12,7%",
+      "status": "tk",
+      "bron": "https://www.rijksfinancien.nl/sites/default/files/bestanden/belastingplan-2027/pakket-belastingplan-2027/Fiscale-sleuteltabel-2027-incl-correctie-tarieven-energiebelasting-zelfstandigenaftrek.pdf"
+    },
+    {
+      "wat": "Zvw-bijdrage ondernemers",
+      "nu": "4,85%",
+      "straks": "5,02%",
+      "status": "vast",
+      "bron": "https://www.taxlive.nl/nl/documenten/vn-vandaag/bedragen-en-percentages-inkomensafhankelijke-bijdragen-2027-vastgesteld/"
+    },
+    {
+      "wat": "Zvw-heffing werkgevers",
+      "nu": "6,10%",
+      "straks": "6,27%",
+      "status": "vast",
+      "bron": "https://www.taxlive.nl/nl/documenten/vn-vandaag/bedragen-en-percentages-inkomensafhankelijke-bijdragen-2027-vastgesteld/"
+    },
+    {
+      "wat": "Eigen risico zorgverzekering",
+      "nu": "€ 385",
+      "straks": "€ 400",
+      "status": "raming",
+      "bron": "https://www.zorgwijzer.nl/zorgverzekering-2027/eigen-risico-definitief-naar-e-400-dit-ligt-nu-vast-voor-2027-en-dit-nog-niet",
+      "noot": "Gemeld door Zorgwijzer; de ministeriële regeling zelf is niet gecontroleerd."
+    },
+    {
+      "wat": "Gemiddelde zorgpremie per jaar",
+      "nu": "€ 1.884",
+      "straks": "€ 2.029",
+      "status": "raming",
+      "bron": "https://www.rijksfinancien.nl/memorie-van-toelichting/2027/OWB/XVI"
+    },
+    {
+      "wat": "Zorgtoeslag alleenstaande (maximum per jaar)",
+      "nu": "€ 1.550",
+      "straks": "€ 1.680",
+      "status": "raming",
+      "bron": "https://www.rijksfinancien.nl/memorie-van-toelichting/2027/OWB/XVI"
+    },
+    {
+      "wat": "Vermogensgrens zorgtoeslag (alleenstaande)",
+      "nu": "€ 146.011",
+      "straks": "€ 119.122",
+      "status": "vast",
+      "bron": "https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/berichten/nieuws/toeslagen/lagere-vermogensgrenzen-zorgtoeslag-kindgebonden-budget-vanaf-1-januari-2027"
+    },
+    {
+      "wat": "Kinderbijslag",
+      "nu": "zie berekening",
+      "straks": "ongeveer € 90 per kind per jaar erbij",
+      "status": "voorstel",
+      "bron": "https://www.eerstekamer.nl/wetsvoorstel/37022_belastingplan_2027",
+      "noot": "Wetsvoorstel 36923 is nog niet door de Tweede Kamer. Exacte bedragen zijn niet gevonden."
+    },
+    {
+      "wat": "Kindgebonden budget",
+      "nu": "zie berekening",
+      "straks": "snellere afbouw bij hoger inkomen",
+      "status": "voorstel",
+      "bron": "https://www.eerstekamer.nl/wetsvoorstel/37022_belastingplan_2027",
+      "noot": "Bedragen en percentages voor 2027 zijn niet gevonden."
+    },
+    {
+      "wat": "Huurtoeslag",
+      "nu": "zie berekening",
+      "straks": null,
+      "status": "onbekend",
+      "bron": null
+    }
+  ]
+}

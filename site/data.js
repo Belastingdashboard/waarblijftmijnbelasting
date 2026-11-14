@@ -136,6 +136,8 @@
     { wat: 'Huurtoeslag', nu: 'zie berekening', straks: null, status: 'onbekend' }
   ];
 
-  root.Data = { BRON: BRON, INWONERS: INWONERS, UITGAVEN: UITGAVEN, GROEPEN: GROEPEN, UITGAVEN_TOTAAL: UITGAVEN_TOTAAL, INKOMSTEN: INKOMSTEN,
-                INKOMSTEN_TOTAAL: INKOMSTEN_TOTAAL, KOSTEN: KOSTEN, PLANNEN: PLANNEN };
+  var api = { BRON: BRON, INWONERS: INWONERS, UITGAVEN: UITGAVEN, GROEPEN: GROEPEN, UITGAVEN_TOTAAL: UITGAVEN_TOTAAL, INKOMSTEN: INKOMSTEN,
+              INKOMSTEN_TOTAAL: INKOMSTEN_TOTAAL, KOSTEN: KOSTEN, PLANNEN: PLANNEN };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else root.Data = api;
 })(typeof window !== 'undefined' ? window : this);

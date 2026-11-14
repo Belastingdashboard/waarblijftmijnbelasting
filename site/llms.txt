@@ -1,0 +1,12 @@
+# waarblijftmijnbelasting.nl
+
+> Nederlandse rekentool: wat betaal je aan belasting over je inkomen in 2026, waar gaat dat geld heen, en wat zou je zelf betalen als de overheid een uitgave schrapt. Alles wordt in de browser uitgerekend; er wordt niets opgeslagen of verstuurd.
+
+De cijfers, bronnen en rekenregels zijn openbaar en bedoeld om na te rekenen.
+
+- [Uitleg en AI-handleiding](https://github.com/Belastingdashboard/waarblijftmijnbelasting/blob/main/README.md)
+- [Methodologie en keuzes](https://github.com/Belastingdashboard/waarblijftmijnbelasting/blob/main/METHODOLOGIE.md)
+- [Belastingregels 2026 (JSON)](https://raw.githubusercontent.com/Belastingdashboard/waarblijftmijnbelasting/main/data/2026/belastingregels.json)
+- [Rijksuitgaven en inkomsten 2026 (JSON)](https://raw.githubusercontent.com/Belastingdashboard/waarblijftmijnbelasting/main/data/2026/rijksuitgaven.json)
+- [Plannen 2027 (JSON)](https://raw.githubusercontent.com/Belastingdashboard/waarblijftmijnbelasting/main/data/2027/plannen.json)
+- [Rekenmodel (JavaScript)](https://raw.githubusercontent.com/Belastingdashboard/waarblijftmijnbelasting/main/site/model.js)
