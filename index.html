@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waar blijft mijn belastinggeld?</title>
+<meta name="description" content="Vul in wat je per maand verdient. Zie wat je aan belasting betaalt en wat je ervoor terugkrijgt.">
+<link rel="canonical" href="https://waarblijftmijnbelasting.nl/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#1e3a2b">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:site_name" content="waarblijftmijnbelasting.nl">
+<meta property="og:url" content="https://waarblijftmijnbelasting.nl/">
+<meta property="og:title" content="Waar blijft mijn belastinggeld?">
+<meta property="og:description" content="Vul in wat je per maand krijgt. Zie wat je aan belasting betaalt en wat je ervoor terugkrijgt.">
+<meta property="og:image" content="https://waarblijftmijnbelasting.nl/deelplaatje.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+:root{
+  --page:#dfe2d5; --paper:#f5f3ea; --forest:#1e3a2b; --forest-2:#2a4c39; --lime:#c9f26c;
+  --ink:#1b241f; --soft:#5d6a61; --line:#d9d6c8; --sun:#f4b63f; --clay:#b9502f; --clay-soft:#f6e1d6; --mint:#e1efd0;
+  --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:17px/1.55 var(--sans)}
+.wrap{max-width:620px;margin:0 auto;padding:16px 16px 120px}
+.card{background:var(--paper);border-radius:22px;padding:24px 22px;margin-top:16px}
+.hero{background:var(--forest);color:var(--paper);padding:28px 22px 26px}
+.steps{display:flex;gap:6px;margin-bottom:22px}
+.steps i{flex:1;height:3px;border-radius:2px;background:rgba(245,243,234,.3)}
+.steps i.on{background:var(--paper)}
+.card:not(.hero) .steps i{background:var(--line)} .card:not(.hero) .steps i.on{background:var(--forest)}
+.brand{font:600 1.05rem var(--serif);color:var(--lime);letter-spacing:.01em}
+h1{font:500 clamp(2rem,8vw,2.7rem)/1.12 var(--serif);margin:.5em 0 .4em;letter-spacing:-.01em}
+h2{font:500 1.6rem/1.2 var(--serif);margin:.5em 0 .3em}
+h3{font:600 1.08rem/1.3 var(--sans);margin:0}
+p{margin:.5em 0}
+.hero p{color:#d5dccd;max-width:34ch}
+.tagrow{display:flex;align-items:center;gap:8px}
+.nr{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--lime);color:var(--forest);font:600 .72rem var(--mono)}
+.pill{display:inline-block;padding:7px 14px;border-radius:999px;background:var(--forest);color:var(--paper);font:600 .68rem var(--mono);letter-spacing:.09em;text-transform:uppercase}
+.hero .pill{background:var(--paper);color:var(--forest)}
+.soft{color:var(--soft)} .small{font-size:.9rem}
+a{color:var(--forest)}
+
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0 6px}
+.choice button{border:2px solid var(--forest);background:transparent;color:var(--forest);border-radius:14px;padding:13px 8px;font:600 1rem var(--sans);cursor:pointer}
+.choice button[aria-pressed="true"]{background:var(--forest);color:var(--paper)}
+label.q{display:block;font:500 1.25rem/1.25 var(--serif);margin-top:18px}
+.money{display:flex;align-items:center;gap:8px;margin-top:10px;background:#fff;border:2px solid var(--forest);border-radius:14px;padding:6px 14px}
+.money span{font:500 1.6rem var(--serif)}
+.money input{flex:1;min-width:0;border:0;background:transparent;font:500 1.9rem var(--serif);color:var(--ink);padding:6px 0;outline:0}
+.money:focus-within{box-shadow:0 0 0 3px var(--lime)}
+.money small{color:var(--soft);white-space:nowrap}
+input[type=range]{width:100%;margin-top:14px;accent-color:var(--forest);height:28px}
+.linkbtn{background:none;border:0;padding:0;color:var(--forest);font:inherit;text-decoration:underline;cursor:pointer}
+details{margin-top:16px}
+summary{cursor:pointer;font-weight:600;color:var(--forest);list-style:none;display:flex;align-items:center;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--lime);color:var(--forest);font:700 1rem var(--mono);flex:none}
+details[open]>summary::before{content:"–"}
+.inner{padding:12px 0 2px}
+.field{margin-top:14px}
+.field>label{display:block;font-weight:600}
+.field input[type=number]{width:100%;margin-top:6px;padding:11px 12px;border:2px solid var(--line);border-radius:12px;background:#fff;font:inherit;color:var(--ink)}
+.kids{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.check{display:flex;gap:10px;align-items:flex-start;margin-top:14px}
+.check input{width:22px;height:22px;margin-top:2px;accent-color:var(--forest);flex:none}
+
+.bigline{font:500 clamp(1.5rem,6vw,2rem)/1.25 var(--serif);margin:.6em 0 .5em}
+.bigline b{background:var(--lime);padding:0 .18em;border-radius:6px;font-weight:600;white-space:nowrap}
+.hundred{display:flex;height:34px;border-radius:10px;overflow:hidden;margin:14px 0 8px}
+.hundred div{display:flex;align-items:center;padding:0 10px;font:600 .8rem var(--mono);white-space:nowrap;overflow:hidden}
+.hundred .you{background:var(--forest);color:var(--paper)} .hundred .tax{background:var(--sun);color:var(--ink)}
+.three{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.box{border:1.5px solid var(--line);border-radius:14px;padding:12px 14px}
+.box .l{font:600 .66rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.box .n{font:500 1.5rem var(--serif);font-variant-numeric:tabular-nums}
+.box.wide{grid-column:1/-1;background:var(--mint);border-color:transparent}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+td,th{padding:8px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.tot td{font-weight:700}
+.scroll{overflow-x:auto}
+
+.item{border-top:1.5px solid var(--line);padding:18px 0}
+.item:first-child{border-top:0}
+.top{display:flex;gap:12px;align-items:flex-start}
+.top .t{flex:1;min-width:0}
+.coin{flex:none;text-align:right}
+.coin b{display:block;font:500 1.55rem/1 var(--serif);font-variant-numeric:tabular-nums}
+.coin span{font:600 .62rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+.meter{height:8px;border-radius:5px;background:var(--line);margin-top:12px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--forest);border-radius:5px}
+.item.off .meter i{background:#a9b0a4}
+.item.off h3{text-decoration:line-through;text-decoration-color:#a9b0a4}
+.stop{display:flex;align-items:center;gap:10px;margin-top:12px;font-weight:600;cursor:pointer}
+.switch{position:relative;width:50px;height:28px;flex:none}
+.switch input{position:absolute;inset:0;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.switch span{position:absolute;inset:0;border-radius:14px;background:var(--forest);transition:background .15s;pointer-events:none}
+.switch span::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .15s;transform:translateX(22px)}
+.switch input:not(:checked)+span{background:#a9b0a4}
+.switch input:not(:checked)+span::after{transform:none}
+.switch input:focus-visible+span{outline:3px solid var(--sun);outline-offset:2px}
+.swap{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.swap div{border-radius:14px;padding:12px 14px}
+.swap .l{font:600 .64rem var(--mono);letter-spacing:.07em;text-transform:uppercase}
+.swap b{display:block;font:500 1.5rem var(--serif);font-variant-numeric:tabular-nums}
+.gain{background:var(--mint)} .cost{background:var(--clay-soft)} .cost b{color:var(--clay)}
+.sum{position:fixed;left:0;right:0;bottom:12px;z-index:5;pointer-events:none}
+.sum div{pointer-events:auto;max-width:588px;margin:0 16px;background:var(--forest);color:var(--paper);border-radius:18px;padding:12px 18px;display:flex;gap:6px 18px;flex-wrap:wrap;align-items:baseline;box-shadow:0 8px 24px rgba(20,40,28,.3)}
+@media (min-width:652px){.sum div{margin:0 auto}}
+.sum b{font:500 1.25rem var(--serif);color:var(--lime);font-variant-numeric:tabular-nums}
+.sum .l{font:600 .64rem var(--mono);letter-spacing:.07em;text-transform:uppercase;display:block;color:#d5dccd}
+.foot{padding:8px 22px 28px;color:var(--soft);font-size:.9rem;line-height:1.5}
+.foot p{margin:0 0 8px}
+.note{background:var(--mint);border-radius:14px;padding:14px 16px;margin-top:14px}
+.status{display:inline-block;font:600 .62rem var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--sun);color:var(--ink);white-space:nowrap}
+.status.vast{background:var(--lime)}
+.hidden{display:none}
+ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="card hero">
+    <div class="steps"><i class="on"></i><i></i><i></i></div>
+    <div class="brand">waarblijftmijnbelasting.nl</div>
+    <h1>Waar blijft mijn belastinggeld?</h1>
+    <p>Vul in wat je per maand krijgt. Dan zie je wat je betaalt, en wat je ervoor terugkrijgt.</p>
+    <div class="tagrow" style="margin-top:20px"><span class="nr">3</span><span class="pill">stappen · 1 minuut</span></div>
+  </header>
+
+  <section class="card" aria-labelledby="h1">
+    <div class="steps"><i class="on"></i><i></i><i></i></div>
+    <div class="tagrow"><span class="nr">01</span><span class="pill">Jij</span></div>
+    <h2 id="h1">Hoe verdien je je geld?</h2>
+    <div class="choice" role="group" aria-label="Soort werk">
+      <button type="button" id="b-loon" aria-pressed="true">Ik heb een baan</button>
+      <button type="button" id="b-ond" aria-pressed="false">Ik heb een eigen bedrijf</button>
+    </div>
+
+    <div id="f-netto">
+      <label class="q" for="netto">Hoeveel krijg je per maand op je rekening?</label>
+      <div class="money"><span>€</span><input type="number" id="netto" min="0" step="50" value="2500" inputmode="numeric"><small>per maand</small></div>
+      <input type="range" id="netto-s" min="0" max="8000" step="50" value="2500" aria-label="Bedrag per maand, schuif">
+      <p class="small soft">Een schatting is prima. <button type="button" class="linkbtn" id="naar-bruto">Ik vul liever mijn bruto jaarsalaris in</button></p>
+    </div>
+
+    <div id="f-bruto" class="hidden">
+      <label class="q" for="loon">Wat is je bruto salaris per jaar?</label>
+      <div class="money"><span>€</span><input type="number" id="loon" min="0" step="500" value="40000" inputmode="numeric"><small>per jaar</small></div>
+      <input type="range" id="loon-s" min="0" max="200000" step="500" value="40000" aria-label="Bruto jaarsalaris, schuif">
+      <p class="small soft">Met vakantiegeld erbij. <button type="button" class="linkbtn" id="naar-netto">Terug naar wat ik per maand krijg</button></p>
+    </div>
+
+    <div id="f-ond" class="hidden">
+      <label class="q" for="omzet">Hoeveel komt er per jaar binnen in je bedrijf?</label>
+      <div class="money"><span>€</span><input type="number" id="omzet" min="0" step="1000" value="70000" inputmode="numeric"><small>per jaar</small></div>
+      <input type="range" id="omzet-s" min="0" max="300000" step="1000" value="70000" aria-label="Omzet per jaar, schuif">
+      <label class="q" for="kosten">Hoeveel geef je per jaar uit voor je bedrijf?</label>
+      <div class="money"><span>€</span><input type="number" id="kosten" min="0" step="500" value="10000" inputmode="numeric"><small>per jaar</small></div>
+      <input type="range" id="kosten-s" min="0" max="300000" step="500" value="10000" aria-label="Kosten per jaar, schuif">
+      <p class="small soft">Bedragen zonder btw. Je betaalt belasting over wat overblijft: je winst.</p>
+    </div>
+
+    <details>
+      <summary>Heb je kinderen, een partner of een huurhuis?</summary>
+      <div class="inner">
+        <p class="small soft">Vul dit in en we rekenen ook uit wat je van de overheid krijgt, zoals zorgtoeslag en kinderbijslag.</p>
+        <label class="check"><input type="checkbox" id="partner"> <span>Ik woon samen met een partner</span></label>
+        <div id="f-partner" class="field hidden">
+          <label for="pink">Wat verdient je partner per jaar (bruto)?</label>
+          <input type="number" id="pink" min="0" step="500" value="0" inputmode="numeric">
+        </div>
+        <div class="field"><label>Hoeveel kinderen heb je?</label>
+          <div class="kids">
+            <div><span class="small soft">0 t/m 5 jaar</span><input type="number" id="k0" min="0" max="10" value="0" inputmode="numeric" aria-label="Kinderen van 0 tot en met 5 jaar"></div>
+            <div><span class="small soft">6 t/m 11 jaar</span><input type="number" id="k6" min="0" max="10" value="0" inputmode="numeric" aria-label="Kinderen van 6 tot en met 11 jaar"></div>
+            <div><span class="small soft">12 t/m 15 jaar</span><input type="number" id="k12" min="0" max="10" value="0" inputmode="numeric" aria-label="Kinderen van 12 tot en met 15 jaar"></div>
+            <div><span class="small soft">16 en 17 jaar</span><input type="number" id="k16" min="0" max="10" value="0" inputmode="numeric" aria-label="Kinderen van 16 en 17 jaar"></div>
+          </div>
+        </div>
+        <div class="field"><label for="huur">Hoeveel huur betaal je per maand?</label>
+          <input type="number" id="huur" min="0" step="10" value="0" inputmode="numeric">
+          <span class="small soft">Zonder servicekosten. Laat op 0 staan als je niet huurt.</span>
+        </div>
+        <label class="check"><input type="checkbox" id="aow"> <span>Ik krijg AOW</span></label>
+        <div id="f-zzp" class="hidden">
+          <label class="check"><input type="checkbox" id="uren" checked> <span>Ik werk minstens 1.225 uur per jaar in mijn bedrijf</span></label>
+          <label class="check"><input type="checkbox" id="starter"> <span>Ik ben pas begonnen (startersaftrek)</span></label>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section class="card" aria-labelledby="h2" aria-live="polite">
+    <div class="steps"><i class="on"></i><i class="on"></i><i></i></div>
+    <div class="tagrow"><span class="nr">02</span><span class="pill">Dit betaal je</span></div>
+    <h2 id="h2" class="hidden">Dit betaal je</h2>
+    <p class="bigline" id="zin"></p>
+    <div class="hundred" aria-hidden="true"><div class="you" id="bar-you"></div><div class="tax" id="bar-tax"></div></div>
+    <div class="three">
+      <div class="box"><div class="l" id="l-bruto">Je bruto loon</div><div class="n" id="n-bruto"></div></div>
+      <div class="box"><div class="l">Belasting per maand</div><div class="n" id="n-tax"></div></div>
+      <div class="box" style="grid-column:1/-1;background:var(--forest);border-color:transparent;color:var(--paper)"><div class="l" style="color:#d5dccd">Je houdt over per maand</div><div class="n" id="n-net"></div></div>
+      <div class="box wide hidden" id="box-toe"><div class="l">Je krijgt van de overheid</div><div class="n" id="n-toe"></div><div class="small" id="t-toe"></div></div>
+    </div>
+    <details>
+      <summary>Laat de hele som zien</summary>
+      <div class="inner">
+        <div class="scroll"><table id="t-calc"></table></div>
+        <p class="small soft" id="werkgever"></p>
+      </div>
+    </details>
+  </section>
+
+  <section class="card" aria-labelledby="h3">
+    <div class="steps"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+    <div class="tagrow"><span class="nr">03</span><span class="pill">Dit krijg je ervoor</span></div>
+    <h2 id="h3">Waar gaat elke € 100 belasting heen?</h2>
+    <p class="soft">Zet een schuifje uit en kijk wat er gebeurt als de overheid ermee stopt. Wat houd je over? En wat betaal je dan zelf?</p>
+    <div id="cats"></div>
+    <details>
+      <summary>Waarom betaal ik zelf vaak meer dan ik bespaar?</summary>
+      <div class="inner">
+        <p>Jouw belasting op je loon is maar een deel van wat de overheid binnenkrijgt. De rest komt van bedrijven, van werkgevers en uit de btw op alles wat mensen kopen.</p>
+        <p>Daarnaast delen we de kosten met elkaar. Wie nu weinig zorg nodig heeft, betaalt mee voor wie veel nodig heeft. Later kan dat andersom zijn.</p>
+      </div>
+    </details>
+  </section>
+
+  <section class="card" aria-labelledby="h4">
+    <div class="tagrow"><span class="nr">+</span><span class="pill">Meer weten</span></div>
+    <h2 id="h4">Een laagje dieper</h2>
+    <details>
+      <summary>Waar haalt de overheid het geld vandaan?</summary>
+      <div class="inner">
+        <p>De overheid krijgt in 2026 <b id="tot-ink"></b> miljard euro binnen. Dat is <b id="ink-pp"></b> per inwoner per jaar. Zoveel geeft de overheid gemiddeld ook per persoon uit.</p>
+        <div id="ink"></div>
+      </div>
+    </details>
+    <details>
+      <summary>Wat verandert er in 2027?</summary>
+      <div class="inner">
+        <div class="note">De Tweede Kamer heeft de plannen voor 2027 op 12 november 2026 goedgekeurd. De Eerste Kamer moet nog stemmen, waarschijnlijk op 15 december. Tot dan zijn het plannen. Nog niet alle bedragen zijn bekend. Daarom rekenen we hier alleen met 2026.</div>
+        <div class="scroll"><table id="t-27"></table></div>
+      </div>
+    </details>
+    <details>
+      <summary>Hoe is dit berekend?</summary>
+      <div class="inner">
+        <p>Alle cijfers komen van de overheid zelf: de Belastingdienst, Dienst Toeslagen, de SVB, het CBS en de Miljoenennota. We hebben niets geschat. Weten we iets niet, dan staat dat erbij.</p>
+        <h3>Dit telt niet mee</h3>
+        <ul>
+          <li>Vakantiegeld, als je invult wat je per maand krijgt. We rekenen met 12 keer je maandbedrag.</li>
+          <li>Pensioenpremie en aftrekposten zoals hypotheekrente.</li>
+          <li>Belasting op spaargeld en beleggingen.</li>
+          <li>Btw, accijns op benzine, energiebelasting en gemeentelijke belastingen. Die betaal je ook, maar niet via je loon.</li>
+          <li>Kinderopvangtoeslag.</li>
+        </ul>
+        <h3>Goed om te weten</h3>
+        <ul>
+          <li>De uitgaven komen uit de Miljoenennota 2026. Het totaal is later bijgesteld naar 481,2 miljard, maar een nieuwe verdeling is er niet.</li>
+          <li>Zorgkosten zijn de gemiddelde kosten van de basisverzekering per persoon in 2024. Het verpleeghuis en andere langdurige zorg zitten daar niet in.</li>
+          <li>Kosten per leerling zijn wat het Rijk in 2026 per leerling aan scholen betaalt. Kinderen van 4 en 5 zijn niet meegeteld.</li>
+          <li>Een eigen bedrijf betekent hier een eenmanszaak of vof, geen bv.</li>
+          <li>Dit is geen belastingadvies. Je echte aanslag kan iets afwijken.</li>
+        </ul>
+        <h3>Bronnen</h3>
+        <ul id="bronnen" class="small"></ul>
+      </div>
+    </details>
+  </section>
+
+  <footer class="foot">
+    <p>Deze site bewaart niets. Wat je invult blijft op je eigen telefoon of computer. Er zijn geen cookies en we volgen je niet.</p>
+    <p>Rekent met de regels van 2026. Laatst bijgewerkt op 14 november 2026.</p>
+  </footer>
+</div>
+
+<div class="sum hidden" id="sum" aria-live="polite"><div id="sum-in"></div></div>
+
+<script src="model.js"></script>
+<script src="data.js"></script>
+<script>
+(function(){
+  'use strict';
+  var B = window.Belasting, D = window.Data;
+  var $ = function(id){ return document.getElementById(id); };
+  var eur = new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+  var num1 = new Intl.NumberFormat('nl-NL',{minimumFractionDigits:1,maximumFractionDigits:1});
+  var E = function(x){ return eur.format(Math.round(x)); };
+  var M = function(x){ return E(x/12); };
+  var type = 'loondienst', metBruto = false, uit = {}, open = {};
+
+  var deel = {}; D.UITGAVEN.forEach(function(u){ deel[u.id] = u; });
+  var groepen = D.GROEPEN.map(function(g){
+    var mld = g.delen.reduce(function(a,id){ return a + deel[id].mld; }, 0);
+    return { id:g.id, naam:g.naam, uitleg:g.uitleg, delen:g.delen, mld:mld };
+  });
+  var totaal = groepen.reduce(function(a,g){ return a+g.mld; },0);
+  groepen.sort(function(a,b){ return (a.id==='rest') - (b.id==='rest') || b.mld - a.mld; });
+
+  function val(id){ var v = parseFloat($(id).value); return isFinite(v) && v>0 ? v : 0; }
+  function koppel(a,b){
+    $(a).addEventListener('input',function(){ $(b).value=$(a).value; teken(); });
+    $(b).addEventListener('input',function(){ $(a).value=$(b).value; teken(); });
+  }
+  koppel('netto-s','netto'); koppel('loon-s','loon'); koppel('omzet-s','omzet'); koppel('kosten-s','kosten');
+  ['uren','starter','partner','pink','k0','k6','k12','k16','huur','aow'].forEach(function(id){ $(id).addEventListener('input',teken); });
+
+  function toonVelden(){
+    $('b-loon').setAttribute('aria-pressed', type==='loondienst');
+    $('b-ond').setAttribute('aria-pressed', type==='ondernemer');
+    $('f-netto').classList.toggle('hidden', type!=='loondienst' || metBruto);
+    $('f-bruto').classList.toggle('hidden', type!=='loondienst' || !metBruto);
+    $('f-ond').classList.toggle('hidden', type!=='ondernemer');
+    $('f-zzp').classList.toggle('hidden', type!=='ondernemer');
+    teken();
+  }
+  $('b-loon').addEventListener('click',function(){ type='loondienst'; toonVelden(); });
+  $('b-ond').addEventListener('click',function(){ type='ondernemer'; toonVelden(); });
+  $('naar-bruto').addEventListener('click',function(){
+    var b = Math.round(brutoBijNetto(val('netto')*12, basis())/500)*500;
+    $('loon').value = b; $('loon-s').value = b; metBruto = true; toonVelden(); $('loon').focus();
+  });
+  $('naar-netto').addEventListener('click',function(){ metBruto = false; toonVelden(); $('netto').focus(); });
+
+  function basis(){
+    return {
+      type:type, omzet:val('omzet'), kosten:val('kosten'),
+      urencriterium:$('uren').checked, starter:$('starter').checked, aow:$('aow').checked,
+      partner:$('partner').checked, partnerInkomen:val('pink'),
+      kinderen:{k0tot5:Math.floor(val('k0')),k6tot11:Math.floor(val('k6')),k12tot15:Math.floor(val('k12')),k16en17:Math.floor(val('k16'))},
+      huur:val('huur')
+    };
+  }
+  // Zoek het bruto jaarsalaris dat hoort bij een netto jaarbedrag (netto loopt altijd op met bruto)
+  function brutoBijNetto(nettoJaar, inv){
+    var laag = 0, hoog = 2000000, o = Object.assign({}, inv, { type:'loondienst' });
+    for (var i=0;i<50;i++){
+      var mid = (laag+hoog)/2; o.brutoLoon = mid;
+      if (B.bereken(o).netto < nettoJaar) laag = mid; else hoog = mid;
+    }
+    return (laag+hoog)/2;
+  }
+  function invoer(){
+    var inv = basis();
+    if (type==='loondienst') inv.brutoLoon = metBruto ? val('loon') : brutoBijNetto(val('netto')*12, inv);
+    return inv;
+  }
+
+  // Wat betaal je zelf als de overheid hiermee stopt? { bedrag per jaar, zin, som }
+  function zelf(g, inv, r){
+    var k = inv.kinderen, kids = k.k0tot5+k.k6tot11+k.k12tot15+k.k16en17;
+    var personen = 1 + (inv.partner?1:0) + kids, K = D.KOSTEN;
+    if (g.id==='zorg'){
+      var zorg = (inv.aow?K.zorg.k60tot80:K.zorg.gemiddeld) + (inv.partner?K.zorg.gemiddeld:0) + kids*K.zorg.k0tot20;
+      var zt = r.toeslagen.zorgtoeslag;
+      return { bedrag: zorg+zt,
+        zin: 'Een huishouden als het jouwe gebruikt gemiddeld voor '+M(zorg)+' per maand aan zorg.'+(zt?' Je zorgtoeslag van '+M(zt)+' per maand stopt ook.':''),
+        som: 'Gemiddelde kosten van de basisverzekering per persoon per jaar (CBS, 2024): '+E(K.zorg.gemiddeld)+' voor een volwassene, '+E(K.zorg.k60tot80)+' voor iemand van 60 tot 80 jaar en '+E(K.zorg.k0tot20)+' voor een kind. Het verpleeghuis zit hier niet in. Je betaalt nu al zorgpremie (gemiddeld '+E(B.P2026.zorgpremieGemiddeld)+' per jaar); die zou dan vervallen.' };
+    }
+    if (g.id==='onderwijs'){
+      var school = k.k6tot11*K.onderwijs.primair + (k.k12tot15+k.k16en17)*K.onderwijs.voortgezet;
+      return { bedrag: school,
+        zin: school ? 'Dit kost de school van jouw kinderen. Een kind op de basisschool kost '+M(K.onderwijs.primair)+' per maand, op de middelbare school '+M(K.onderwijs.voortgezet)+'.'
+                    : 'Je hebt geen schoolgaande kinderen ingevuld. Dan betaal je nu niets. Maar een kind op de basisschool kost '+M(K.onderwijs.primair)+' per maand.',
+        som: 'Wat het Rijk in 2026 per leerling aan scholen betaalt: '+E(K.onderwijs.primair)+' per jaar op de basisschool, '+E(K.onderwijs.voortgezet)+' op de middelbare school en '+E(K.onderwijs.mbo)+' op het mbo (begroting OCW).' };
+    }
+    if (g.id==='sociaal'){
+      var aow = inv.aow ? 12*(inv.partner?K.aow.samenwonend:K.aow.alleenstaand) : 0;
+      var kb = r.toeslagen.kinderbijslag, kgb = r.toeslagen.kindgebondenBudget, d = [];
+      if (aow) d.push('je AOW ('+M(aow)+' per maand)');
+      if (kb) d.push('kinderbijslag ('+M(kb)+' per maand)');
+      if (kgb) d.push('kindgebonden budget ('+M(kgb)+' per maand)');
+      return { bedrag: aow+kb+kgb,
+        zin: (d.length ? 'Je raakt dit kwijt: '+d.join(', ')+'. ' : 'Je krijgt hier nu niets uit. ')
+           + 'En er is geen vangnet meer als je ziek wordt of je baan verliest.'
+           + (inv.aow ? '' : ' Ook krijg je later geen AOW. Dat is nu '+E(K.aow.alleenstaand)+' per maand voor iemand die alleen woont.'),
+        som: 'AOW-bedrag bruto per maand met vakantiegeld, vanaf 1 juli 2026 (SVB). Wat het kost om jezelf te verzekeren tegen ziekte en werkloosheid weten we niet; daar is geen officieel cijfer van.' };
+    }
+    var gem = g.mld*1e9/D.INWONERS, ht = g.id==='wonen' ? r.toeslagen.huurtoeslag : 0;
+    if (ht) return { bedrag: ht,
+      zin: 'Je huurtoeslag van '+M(ht)+' per maand stopt.',
+      som: 'Huurtoeslag volgens de rekenregels 2026 van Dienst Toeslagen. De rest van dit onderdeel kun je niet per persoon uitrekenen.' };
+    return { bedrag: gem*personen,
+      zin: 'Dit kun je niet in je eentje kopen. Verdeeld over alle inwoners kost het '+M(gem)+' per persoon per maand.',
+      som: num1.format(g.mld)+' miljard euro gedeeld door '+new Intl.NumberFormat('nl-NL').format(D.INWONERS)+' inwoners is '+E(gem)+' per persoon per jaar. Voor '+personen+(personen===1?' persoon':' personen')+' in jouw huishouden.' };
+  }
+
+  function rij(naam, bedrag, cls){ return '<tr'+(cls?' class="'+cls+'"':'')+'><td>'+naam+'</td><td class="r">'+E(bedrag)+'</td></tr>'; }
+
+  function teken(){
+    var inv = invoer(), r = B.bereken(inv), zzp = type==='ondernemer';
+    $('f-partner').classList.toggle('hidden', !inv.partner);
+
+    var per100 = r.bruto>0 ? r.heffingTotaal/r.bruto*100 : 0;
+    $('zin').innerHTML = r.bruto<=0 ? 'Vul hierboven een bedrag in.'
+      : per100<0.5 ? 'Je betaalt <b>geen belasting</b> over je '+(zzp?'winst':'loon')+'.'
+      : 'Van elke € 100 die je verdient, gaat <b>€ '+Math.round(per100)+'</b> naar belasting. Jij houdt <b>€ '+(100-Math.round(per100))+'</b> over.';
+    $('bar-you').style.width = (100-per100)+'%'; $('bar-you').textContent = 'voor jou';
+    $('bar-tax').style.width = per100+'%'; $('bar-tax').textContent = per100>32 ? 'belasting' : '';
+    $('l-bruto').textContent = zzp ? 'Je winst per maand' : 'Bruto loon per maand';
+    $('n-bruto').textContent = M(r.bruto); $('n-tax').textContent = M(r.heffingTotaal); $('n-net').textContent = M(r.netto);
+
+    var t = r.toeslagen, lijst = [];
+    if (t.zorgtoeslag) lijst.push('zorgtoeslag '+M(t.zorgtoeslag));
+    if (t.huurtoeslag) lijst.push('huurtoeslag '+M(t.huurtoeslag));
+    if (t.kindgebondenBudget) lijst.push('kindgebonden budget '+M(t.kindgebondenBudget));
+    if (t.kinderbijslag) lijst.push('kinderbijslag '+M(t.kinderbijslag));
+    $('box-toe').classList.toggle('hidden', !t.totaal);
+    $('n-toe').textContent = M(t.totaal)+' per maand';
+    $('t-toe').textContent = lijst.join(' · ');
+
+    var h = '<tr><th>Per jaar</th><th class="r"></th></tr>';
+    if (zzp){
+      h += rij('Winst (wat binnenkomt min je kosten)', r.winst);
+      if (r.zelfstandigenaftrek) h += rij('Zelfstandigenaftrek', -r.zelfstandigenaftrek);
+      if (r.startersaftrek) h += rij('Startersaftrek', -r.startersaftrek);
+      h += rij('Mkb-winstvrijstelling (12,7%)', -r.mkbVrijstelling);
+      h += rij('Hierover betaal je belasting', r.belastbaarInkomen, 'tot');
+    } else h += rij('Bruto salaris', r.bruto, 'tot');
+    h += rij('Belasting over de eerste € 38.883', r.schijven.s1);
+    if (r.schijven.s2) h += rij('Belasting tot € 78.426 (37,56%)', r.schijven.s2);
+    if (r.schijven.s3) h += rij('Belasting daarboven (49,50%)', r.schijven.s3);
+    if (r.tariefsaanpassing) h += rij('Minder aftrek bij hoog inkomen', r.tariefsaanpassing);
+    h += rij('Korting voor iedereen (algemene heffingskorting)', -r.kortingen.algemeen);
+    h += rij('Korting omdat je werkt (arbeidskorting)', -r.kortingen.arbeid);
+    if (r.kortingen.combinatie) h += rij('Korting voor werkende ouders', -r.kortingen.combinatie);
+    if (r.kortingen.ouderen) h += rij('Ouderenkorting', -r.kortingen.ouderen);
+    if (r.kortingen.alleenstaandeOuderen) h += rij('Alleenstaandeouderenkorting', -r.kortingen.alleenstaandeOuderen);
+    if (r.kortingen.totaal > r.kortingen.benut) h += rij('Korting die je niet kunt gebruiken', r.kortingen.totaal - r.kortingen.benut);
+    h += rij('Belasting en premies', r.inkomstenbelasting, 'tot');
+    if (zzp) h += rij('Bijdrage zorgverzekering (4,85%)', r.zvwZelf);
+    h += rij('Dit houd je over', r.netto, 'tot');
+    $('t-calc').innerHTML = h;
+    $('werkgever').textContent = r.werkgever
+      ? 'Je werkgever betaalt daarnaast zelf nog '+E(r.werkgever.totaalLaag)+' tot '+E(r.werkgever.totaalHoog)+' per jaar aan premies voor jou. Dat staat niet op je loonstrook. Daarmee ben je verzekerd voor zorg, werkloosheid en arbeidsongeschiktheid.'
+      : 'Met een eigen bedrijf ben je niet verzekerd als je ziek wordt of geen werk hebt. Je betaalt daar ook geen premie voor.';
+
+    [].forEach.call($('cats').querySelectorAll('details[data-g]'),function(d){ open[d.getAttribute('data-g')] = d.open; });
+    var max = groepen[0].mld, c = '', bespaar = 0, betaal = 0, n = 0;
+    groepen.forEach(function(g){
+      var aandeel = g.mld/totaal, jouw = r.heffingTotaal*aandeel, off = !!uit[g.id];
+      c += '<div class="item'+(off?' off':'')+'"><div class="top"><div class="t"><h3>'+g.naam+'</h3><div class="soft small">'+g.uitleg+'</div></div>'
+        + '<div class="coin"><b>€ '+Math.round(aandeel*100)+'</b><span>van elke € 100</span></div></div>'
+        + '<div class="meter"><i style="width:'+(g.mld/max*100)+'%"></i></div>'
+        + '<label class="stop"><span class="switch"><input type="checkbox" data-id="'+g.id+'"'+(off?'':' checked')+'><span></span></span>'
+        + '<span>'+(off?'De overheid is hiermee gestopt':'De overheid betaalt dit')+'</span></label>';
+      if (off){
+        var z = zelf(g, inv, r); n++; bespaar += jouw; betaal += z.bedrag;
+        c += '<div class="swap"><div class="gain"><span class="l">Je houdt over</span><b>'+M(jouw)+'</b><span class="small">per maand</span></div>'
+          + '<div class="cost"><span class="l">Je betaalt zelf</span><b>'+M(z.bedrag)+'</b><span class="small">per maand</span></div></div>'
+          + '<p>'+z.zin+'</p>';
+      }
+      c += '<details data-g="'+g.id+'"'+(open[g.id]?' open':'')+'><summary>Meer hierover</summary><div class="inner small">'
+        + '<p>Van jouw belasting gaat hier '+M(jouw)+' per maand naartoe.</p>'
+        + '<p>De overheid geeft hier in 2026 '+num1.format(g.mld)+' miljard euro aan uit'
+        + (g.delen.length>1 ? ': '+g.delen.map(function(id){ return deel[id].naam.toLowerCase()+' ('+num1.format(deel[id].mld)+' miljard)'; }).join(', ') : '')+'.</p>'
+        + (off ? '<p>'+zelf(g, inv, r).som+'</p>' : '')
+        + '</div></details></div>';
+    });
+    $('cats').innerHTML = c;
+    $('sum').classList.toggle('hidden', !n);
+    var saldo = bespaar-betaal;
+    $('sum-in').innerHTML = '<span><span class="l">Je houdt over</span><b>'+M(bespaar)+'</b></span>'
+      + '<span><span class="l">Je betaalt zelf</span><b>'+M(betaal)+'</b></span>'
+      + '<span><span class="l">Per maand '+(saldo>=0?'beter af':'slechter af')+'</span><b>'+M(Math.abs(saldo))+'</b></span>';
+  }
+
+  $('cats').addEventListener('change',function(e){
+    var id = e.target.getAttribute('data-id'); if(!id) return;
+    uit[id] = !e.target.checked; teken();
+    var el = $('cats').querySelector('input[data-id="'+id+'"]'); if (el) el.focus();
+  });
+
+  $('tot-ink').textContent = num1.format(D.INKOMSTEN_TOTAAL);
+  $('ink-pp').textContent = E(D.INKOMSTEN_TOTAAL*1e9/D.INWONERS);
+  var genoemd = D.INKOMSTEN.reduce(function(a,c){ return a+c.mld; },0);
+  var ink = D.INKOMSTEN.concat([{naam:'Overige belastingen', mld:D.INKOMSTEN_TOTAAL-genoemd}]);
+  $('ink').innerHTML = ink.map(function(i){
+    return '<div class="item"><div class="top"><div class="t"><h3>'+i.naam+'</h3></div><div class="coin"><b>€ '+Math.round(i.mld/D.INKOMSTEN_TOTAAL*100)+'</b><span>van elke € 100</span></div></div>'
+      + '<div class="meter"><i style="width:'+(i.mld/ink[0].mld*100)+'%"></i></div></div>';
+  }).join('');
+
+  var labels = { vast:'staat vast', tk:'plan', voorstel:'plan', raming:'schatting overheid', onbekend:'nog onbekend' };
+  $('t-27').innerHTML = '<tr><th>Wat</th><th class="r">2026</th><th class="r">2027</th></tr>'
+    + D.PLANNEN.map(function(p){
+      return '<tr><td>'+p.wat+'<br><span class="status '+p.status+'">'+labels[p.status]+'</span>'
+        + (p.bron?' <a class="small" href="'+D.BRON[p.bron]+'" target="_blank" rel="noopener">bron</a>':'')
+        + (p.noot?'<div class="small soft">'+p.noot+'</div>':'')+'</td><td class="r">'+p.nu+'</td><td class="r">'
+        + (p.straks===null?'nog onbekend':p.straks)+'</td></tr>';
+    }).join('');
+
+  var bronnen = [
+    ['Belastingdienst: tarieven 2026', B.BRONNEN.loonheffingen],
+    ['Belastingdienst: algemene heffingskorting', B.BRONNEN.ahk],
+    ['Belastingdienst: arbeidskorting', B.BRONNEN.arbeidskorting],
+    ['Belastingdienst: zorgverzekeringswet', B.BRONNEN.zvw],
+    ['Belastingdienst: zelfstandigenaftrek', B.BRONNEN.zelfstandigenaftrek],
+    ['Dienst Toeslagen: zorgtoeslag', B.BRONNEN.zorgtoeslag],
+    ['Dienst Toeslagen: kindgebonden budget', B.BRONNEN.kindgebondenBudget],
+    ['Dienst Toeslagen: huurtoeslag', B.BRONNEN.huurtoeslag],
+    ['SVB: kinderbijslag', B.BRONNEN.kinderbijslag],
+    ['SVB: AOW', D.BRON.svbAow],
+    ['Rijksoverheid: zorgpremie', B.BRONNEN.zorgpremie],
+    ['Miljoenennota 2026', D.BRON.mn2026],
+    ['Miljoenennota 2027', D.BRON.mn2027],
+    ['CBS: aantal inwoners', D.BRON.cbsBevolking],
+    ['CBS: zorgkosten per persoon', D.BRON.cbsZorg],
+    ['Begroting onderwijs: kosten per leerling', D.BRON.ocw],
+    ['Eerste Kamer: Belastingplan 2027', D.BRON.eersteKamer]
+  ];
+  $('bronnen').innerHTML = bronnen.map(function(b){ return '<li><a href="'+b[1]+'" target="_blank" rel="noopener">'+b[0]+'</a></li>'; }).join('');
+
+  toonVelden();
+})();
+</script>
+</body>
+</html>
