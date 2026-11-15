@@ -122,6 +122,8 @@ tr.tot td{font-weight:700}
 .note{background:var(--mint);border-radius:14px;padding:14px 16px;margin-top:14px}
 .status{display:inline-block;font:600 .62rem var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--sun);color:var(--ink);white-space:nowrap}
 .status.vast{background:var(--lime)}
+.knop{display:inline-block;margin-top:6px;padding:13px 20px;border-radius:14px;background:var(--forest);color:var(--paper);font:600 1rem var(--sans);text-decoration:none}
+.knop:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
 .hidden{display:none}
 ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
 </style>
@@ -292,6 +294,15 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
         <ul id="bronnen" class="small"></ul>
       </div>
     </details>
+  </section>
+
+  <!-- Andere landen vergelijken. Proef: dit blok is alleen te zien op je eigen computer (zie buitenland/README.md). -->
+  <section class="card hidden" id="landen" aria-labelledby="h5">
+    <div class="tagrow"><span class="nr">↔</span><span class="pill">Proef · andere landen</span></div>
+    <h2 id="h5">Andere landen vergelijken</h2>
+    <p>Wat zou je betalen als je met hetzelfde loon in een ander land woonde? En waar gaat het belastinggeld daar heen?</p>
+    <p><a class="knop" id="naar-landen" href="../buitenland/vergelijken.html">Vergelijk met een ander land</a></p>
+    <p class="small soft">We nemen mee wat je hierboven invulde. Dat blijft op je eigen telefoon of computer.</p>
   </section>
 
   <footer class="foot">
@@ -513,6 +524,17 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
     $('sum-in').innerHTML = '<span><span class="l">Je houdt over</span><b>'+M(bespaar)+'</b></span>'
       + '<span><span class="l">Je betaalt zelf</span><b>'+M(betaal)+'</b></span>'
       + '<span><span class="l">Per maand '+(saldo>=0?'beter af':'slechter af')+'</span><b>'+M(Math.abs(saldo))+'</b></span>';
+
+    // Geef wat is ingevuld mee aan de vergelijking met andere landen. Het staat achter het hekje in het adres;
+    // dat deel wordt niet naar een server gestuurd. Huur en koophuis gaan niet mee: die worden niet vergeleken.
+    var k = inv.kinderen, mee = ['type='+type];
+    if (zzp) mee.push('omzet='+Math.round(inv.omzet), 'kosten='+Math.round(inv.kosten));
+    else mee.push('bruto='+Math.round(inv.brutoLoon));
+    if (inv.partner) mee.push('partner=1', 'pink='+Math.round(inv.partnerInkomen));
+    if (k.k0tot5) mee.push('k0='+k.k0tot5); if (k.k6tot11) mee.push('k6='+k.k6tot11);
+    if (k.k12tot15) mee.push('k12='+k.k12tot15); if (k.k16en17) mee.push('k16='+k.k16en17);
+    if (inv.aow) mee.push('aow=1'); if (zzp && inv.starter) mee.push('starter=1');
+    $('naar-landen').href = '../buitenland/vergelijken.html#'+mee.join('&');
   }
 
   $('cats').addEventListener('change',function(e){
@@ -560,6 +582,14 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
     ['Eerste Kamer: Belastingplan 2027', D.BRON.eersteKamer]
   ];
   $('bronnen').innerHTML = bronnen.map(function(b){ return '<li><a href="'+b[1]+'" target="_blank" rel="noopener">'+b[0]+'</a></li>'; }).join('');
+
+  // Het blok "Andere landen vergelijken" is een proef. Het verschijnt alleen op je eigen computer,
+  // en alleen als de vergelijkingspagina daar ook echt te openen is. Online blijft het verborgen.
+  if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) {
+    fetch('../buitenland/vergelijken.html', { method:'HEAD' }).then(function(a){
+      if (a.ok) $('landen').classList.remove('hidden');
+    }).catch(function(){});
+  }
 
   toonVelden();
 })();
