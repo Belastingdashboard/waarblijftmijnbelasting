@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Proefpagina buitenland: België</title>
+<style>
+:root{--page:#dfe2d5;--paper:#f5f3ea;--forest:#1e3a2b;--lime:#c9f26c;--ink:#1b241f;--soft:#5d6a61;--line:#d9d6c8;--clay:#b9502f;--mint:#e1efd0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+.card{background:var(--paper);border-radius:18px;padding:20px;margin-top:16px}
+h1{font:500 1.7rem/1.2 ui-serif,Georgia,serif;margin:0 0 .3em}
+h2{font:500 1.25rem/1.2 ui-serif,Georgia,serif;margin:0 0 .5em}
+.warn{background:#f6e1d6;border-radius:12px;padding:12px 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+label{display:block;font-weight:600;font-size:.9rem}
+input[type=number],select{width:100%;margin-top:4px;padding:9px 10px;border:2px solid var(--line);border-radius:10px;background:#fff;font:inherit}
+label.c{display:flex;gap:8px;align-items:center;font-weight:500}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+td,th{padding:7px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.tot td{font-weight:700}
+.scroll{overflow-x:auto}
+.soft{color:var(--soft)} .small{font-size:.88rem}
+pre{white-space:pre-wrap;font:.8rem/1.45 ui-monospace,Consolas,monospace;margin:0;max-height:320px;overflow:auto}
+ul{padding-left:1.2em;margin:.4em 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>Proefpagina: België naast Nederland</h1>
+    <p class="warn">Werk in uitvoering. Deze pagina komt niet online. De Belgische cijfers zijn nog niet door een mens nagekeken en een deel van de regels is niet meegenomen. Zie <code>landen/belgie/OPEN-PUNTEN.md</code>.</p>
+  </div>
+
+  <div class="card">
+    <h2>Invoer</h2>
+    <div class="grid">
+      <label>Soort werk<select id="type"><option value="loondienst">Baan</option><option value="ondernemer">Eigen bedrijf</option></select></label>
+      <label>Bruto salaris per jaar<input type="number" id="loon" value="40000" step="500" min="0"></label>
+      <label>Omzet per jaar<input type="number" id="omzet" value="70000" step="1000" min="0"></label>
+      <label>Kosten per jaar<input type="number" id="kosten" value="10000" step="500" min="0"></label>
+      <label>Inkomen partner per jaar<input type="number" id="pink" value="0" step="500" min="0"></label>
+      <label>Kinderen 0 t/m 5<input type="number" id="k0" value="0" min="0" max="10"></label>
+      <label>Kinderen 6 t/m 11<input type="number" id="k6" value="0" min="0" max="10"></label>
+      <label>Kinderen 12 t/m 15<input type="number" id="k12" value="0" min="0" max="10"></label>
+      <label>Kinderen 16 en 17<input type="number" id="k16" value="0" min="0" max="10"></label>
+      <label>België: gemeentebelasting in %<input type="number" id="gem" value="" step="0.1" min="0" placeholder="leeg = onbekend"></label>
+      <label>België: gewest<select id="gewest"><option value="">niet ingevuld</option><option value="vlaanderen">Vlaanderen</option><option value="wallonie">Wallonië</option><option value="brussel">Brussel</option></select></label>
+    </div>
+    <p>
+      <label class="c"><input type="checkbox" id="partner"> Ik woon samen met een partner</label>
+      <label class="c"><input type="checkbox" id="gehuwd"> België: gehuwd of wettelijk samenwonend</label>
+      <label class="c"><input type="checkbox" id="aow"> Ik krijg AOW / pensioen</label>
+      <label class="c"><input type="checkbox" id="starter"> Starter (eigen bedrijf)</label>
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Vergelijking per jaar</h2>
+    <div class="scroll"><table id="t-vgl"></table></div>
+    <p class="small soft">Zelfde bruto bedrag in beide landen. Kosten van levensonderhoud, huizenprijzen, btw en lokale belastingen zijn niet vergeleken.</p>
+  </div>
+
+  <div class="card">
+    <h2>De hele som voor België</h2>
+    <div class="scroll"><table id="t-be"></table></div>
+    <div id="meldingen" class="small"></div>
+  </div>
+
+  <div class="card">
+    <h2>Waar gaat het geld heen?</h2>
+    <p class="small soft" id="uit-uitleg"></p>
+    <div class="scroll"><table id="t-uit"></table></div>
+  </div>
+
+  <div class="card">
+    <h2>Rekencontroles</h2>
+    <p id="test-kop"></p>
+    <pre id="test-uit"></pre>
+  </div>
+</div>
+
+<script src="../site/model.js"></script>
+<script src="landen/belgie/regels.js"></script>
+<script src="landen/belgie/model.js"></script>
+<script src="landen/belgie/data.js"></script>
+<script src="../site/data.js"></script>
+<script src="landen/nederland/data.js"></script>
+<script src="landen/belgie/test.js"></script>
+<script src="landen/nederland/test.js"></script>
+<script>
+(function(){
+  'use strict';
+  var Nederland = window.Belasting, Belgie = window.BelastingBelgie, D = window.DataBelgie, DN = window.DataNederland;
+  var $ = function(id){ return document.getElementById(id); };
+  var eur = new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+  var num1 = new Intl.NumberFormat('nl-NL',{minimumFractionDigits:1,maximumFractionDigits:1});
+  var E = function(x){ return x===null || x===undefined ? 'onbekend' : eur.format(Math.round(x)); };
+  function val(id){ var v = parseFloat($(id).value); return isFinite(v) && v>0 ? v : 0; }
+
+  function invoer(){
+    var inv = { type:$('type').value, brutoLoon:val('loon'), omzet:val('omzet'), kosten:val('kosten'),
+      urencriterium:true, starter:$('starter').checked, aow:$('aow').checked,
+      partner:$('partner').checked, partnerInkomen:val('pink'),
+      kinderen:{k0tot5:Math.floor(val('k0')),k6tot11:Math.floor(val('k6')),k12tot15:Math.floor(val('k12')),k16en17:Math.floor(val('k16'))},
+      huur:0, woz:0, hypotheekrente:0,
+      gehuwd:$('gehuwd').checked, gewest:$('gewest').value || null };
+    if ($('gem').value !== '') inv.gemeentebelasting = val('gem')/100;
+    return inv;
+  }
+  function teken(){
+    var inv = invoer(), n = Nederland.bereken(inv), b = Belgie.bereken(inv);
+    var pct = function(r){ return r.bruto>0 ? Math.round(r.heffingTotaal/r.bruto*100)+'%' : '-'; };
+    var rijen = [
+      ['Bruto loon of winst', E(n.bruto), E(b.bruto)],
+      ['Belasting en bijdragen', E(n.heffingTotaal), E(b.heffingTotaal)],
+      ['Aandeel van bruto', pct(n), pct(b)],
+      ['Je houdt over', E(n.netto), E(b.netto)],
+      ['Kinderbijslag', E(n.toeslagen.kinderbijslag), E(b.toeslagen.kinderbijslag)],
+      ['Andere toeslagen', E(n.toeslagen.totaal - n.toeslagen.kinderbijslag), 'niet meegenomen'],
+      ['Werkgever betaalt daarbovenop', n.werkgever ? E(n.werkgever.totaalLaag)+' tot '+E(n.werkgever.totaalHoog) : '-', b.werkgever ? E(b.werkgever.totaalLaag) : '-']
+    ];
+    $('t-vgl').innerHTML = '<tr><th></th><th class="r">Nederland</th><th class="r">België</th></tr>'
+      + rijen.map(function(r,i){ return '<tr'+(i===3?' class="tot"':'')+'><td>'+r[0]+'</td><td class="r">'+r[1]+'</td><td class="r">'+r[2]+'</td></tr>'; }).join('');
+    $('t-be').innerHTML = '<tr><th>Per jaar</th><th class="r"></th></tr>'
+      + b.som.map(function(r){ return '<tr'+(r.totaal?' class="tot"':'')+'><td>'+r.naam+'</td><td class="r">'+E(r.bedrag)+'</td></tr>'; }).join('');
+    var m = '';
+    if (b.onbekend.length) m += '<p><b>Onbekend</b></p><ul>'+b.onbekend.map(function(x){ return '<li>'+x+'</li>'; }).join('')+'</ul>';
+    if (b.nietMeegenomen.length) m += '<p><b>Niet meegenomen</b></p><ul>'+b.nietMeegenomen.map(function(x){ return '<li>'+x+'</li>'; }).join('')+'</ul>';
+    $('meldingen').innerHTML = m;
+
+    var deelVan = function(d){ var o = {}; d.UITGAVEN.forEach(function(u){ o[u.id] = u; }); return o; };
+    var dn = deelVan(DN), db = deelVan(D);
+    var aandeel = function(g, delen, d){ return g.delen.reduce(function(a,id){ return a+delen[id].mld; },0)/d.UITGAVEN_TOTAAL; };
+    $('t-uit').innerHTML = '<tr><th>Groep</th><th class="r">Nederland: van elke € 100</th><th class="r">België: van elke € 100</th><th class="r">Nederland: van jouw belasting</th><th class="r">België: van jouw belasting</th></tr>'
+      + D.GROEPEN.map(function(g){
+          var an = aandeel(g, dn, DN), ab = aandeel(g, db, D);
+          return '<tr><td>'+g.naam+'<div class="small soft">'+g.uitleg+'</div></td><td class="r">€ '+Math.round(an*100)+'</td><td class="r">€ '+Math.round(ab*100)+'</td><td class="r">'+E(n.heffingTotaal*an)+'</td><td class="r">'+E(b.heffingTotaal*ab)+'</td></tr>';
+        }).join('');
+  }
+  var heel = new Intl.NumberFormat('nl-NL');
+  var land = function(naam, d){ return naam+': '+num1.format(d.UITGAVEN_TOTAAL)+' miljard euro uitgaven, '+num1.format(d.INKOMSTEN_TOTAAL)+' miljard euro inkomsten, '
+    + heel.format(d.INWONERS)+' inwoners, dus '+E(d.UITGAVEN_TOTAAL*1e9/d.INWONERS)+' per inwoner.'; };
+  $('uit-uitleg').textContent = 'Uitgaven van de hele overheid samen in '+D.JAAR_CIJFERS+', voor beide landen uit dezelfde tabellen van Eurostat. '
+    + land('Nederland', DN)+' '+land('België (voorlopig)', D)+' Het aantal inwoners is van 1 januari 2026.';
+  ['type','loon','omzet','kosten','pink','k0','k6','k12','k16','gem','gewest','partner','gehuwd','aow','starter'].forEach(function(id){
+    $(id).addEventListener('input', teken); $(id).addEventListener('change', teken);
+  });
+  var T = window.TestBelgie, TN = window.TestNederland, fouten = T.fout + TN.fout;
+  $('test-kop').textContent = fouten ? fouten+' controle(s) mislukt' : 'Alle '+(T.regels.length+TN.regels.length-2)+' controles geslaagd';
+  $('test-uit').textContent = 'België\n'+T.regels.join('\n')+'\n\nNederland (Eurostat-cijfers voor de vergelijking)\n'+TN.regels.join('\n');
+  teken();
+})();
+</script>
+</body>
+</html>
