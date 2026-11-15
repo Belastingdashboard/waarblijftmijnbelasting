@@ -70,6 +70,15 @@
     // Gemeenschappelijke aanslag, partner zonder beroepsinkomen: zelfde rijen, ander maximum
     bbszSamenEenInkomenMax: 182.82,
 
+    // Minimumloon voor een voltijdse werknemer van 18 jaar of ouder, per maand (GGMMI, cao nr. 43).
+    // Overgenomen van Securex, niet uit een officiële tekst (zie OPEN-PUNTEN.md, punt B10).
+    // Het model gebruikt dit alleen om te zien of een loon bij een voltijdse baan kan horen.
+    minimumloon: [
+      { maanden: [1, 2, 3], bedrag: 2154.11 },
+      { maanden: [4, 5, 6], bedrag: 2189.81 },
+      { maanden: [7, 8, 9, 10, 11, 12], bedrag: 2233.61 }
+    ],
+
     // Werkgever, privésector, werknemers die onder alle regelingen vallen (RSZ, De bijdragen)
     werkgeverBasis: 0.1988,
     werkgeverLoonmatiging: 0.0512,
@@ -120,7 +129,8 @@
     fiscaleWerkbonus: 'https://blog.forumforthefuture.be/nl/article/circulaire-2026c89-over-de-verhoging-van-de-fiscale-werkbonus/32703',
     bbsz: 'https://www.socialsecurity.be/employer/instructions/dmfa/nl/latest/instructions/special_contributions/other_specialcontributions/specialsocialsecuritycontribution.html',
     zelfstandigen: 'https://socialsecurity.belgium.be/sites/default/files/content/docs/nl/sociaal-beleid-vorm-geven/zelfstandigen/bijdragennota_2026_tabel_nl.pdf',
-    groeipakket: 'https://www.vlaanderen.be/vlaams-groeipakket/bedragen-en-betaaldata'
+    groeipakket: 'https://www.vlaanderen.be/vlaams-groeipakket/bedragen-en-betaaldata',
+    minimumloon: 'https://www.securex.be/nl/lex4you/werkgever/actuele-bedragen/sociaalrechtelijke-bedragen/nationaal-gmmi'
   };
 
   var api = { P2026: P2026, P2025: P2025, BRONNEN: BRONNEN, GECONTROLEERD_OP: '2026-11-14' };

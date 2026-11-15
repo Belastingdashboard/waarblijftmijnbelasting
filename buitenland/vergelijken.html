@@ -162,7 +162,9 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
     <div class="tagrow"><span class="nr">02</span><span class="pill">Dit betaal je</span></div>
     <h2 id="h2" class="hidden">Dit betaal je in beide landen</h2>
     <p class="bigline" id="zin"></p>
+    <div class="warn hidden" id="kanniet"></div>
     <div id="balken"></div>
+    <div class="note small hidden" id="pakket"></div>
     <div class="scroll" style="margin-top:14px"><table id="t-vgl"></table></div>
     <div id="meldingen" class="small"></div>
     <details>
@@ -280,11 +282,13 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
   }
 
   function balk(l, r){
+    if (r.onbetrouwbaar) return '<div class="landrij"><div class="kop"><b>'+l.naam+'</b><span class="small soft">kunnen we voor dit loon niet uitrekenen</span></div></div>';
     var p = r.bruto>0 ? Math.max(0, Math.min(100, r.heffingTotaal/r.bruto*100)) : 0;
     return '<div class="landrij"><div class="kop"><b>'+l.naam+'</b><span class="small soft">van elke € 100 gaat € '+Math.round(p)+' naar belasting</span></div>'
       + '<div class="hundred" aria-hidden="true"><div class="you" style="width:'+(100-p)+'%">voor jou</div><div class="tax" style="width:'+p+'%">'+(p>32?'belasting':'')+'</div></div></div>';
   }
   function somTabel(l, r){
+    if (r.onbetrouwbaar) return '<h3 style="margin-top:14px">'+l.naam+'</h3><p class="small">'+r.onbetrouwbaar+' Daarom tonen we geen som.</p>';
     return '<h3 style="margin-top:14px">'+l.naam+'</h3><div class="scroll"><table><tr><th>Per jaar</th><th class="r"></th></tr>'
       + r.som.map(function(x){ return '<tr'+(x.totaal?' class="tot"':'')+'><td>'+x.naam+'</td><td class="r">'+E(x.bedrag)+'</td></tr>'; }).join('')+'</table></div>';
   }
@@ -301,18 +305,29 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
     });
 
     var a = thuis.model.bereken(inv), b = l.model.bereken(inv);
-    var verschil = b.netto - a.netto;
+    // Kan het model van het andere land dit loon niet goed uitrekenen, dan tonen we voor dat land geen bedragen.
+    var kanNiet = b.onbetrouwbaar || null;
+    var Mb = function(x){ return kanNiet ? 'onbekend' : M(x); };
+    // De kop noemt alleen wat er van je loon afgaat. Wat je overhoudt is niet eerlijk te vergelijken,
+    // omdat je er in elk land iets anders voor krijgt (zie het blok "pakket" eronder).
     $('zin').innerHTML = a.bruto<=0 ? 'Vul hierboven een bedrag in.'
-      : Math.abs(verschil) < 60 ? 'Met '+(zzp?'dezelfde winst':'hetzelfde loon')+' houd je '+l.inHet+' <b>ongeveer evenveel</b> over als '+thuis.inHet+'.'
-      : 'Met '+(zzp?'dezelfde winst':'hetzelfde loon')+' houd je '+l.inHet+' <b>'+M(Math.abs(verschil))+' per maand '+(verschil<0?'minder':'meer')+'</b> over dan '+thuis.inHet+'.';
+      : kanNiet ? 'Voor dit loon kunnen we '+l.naam+' <b>niet uitrekenen</b>. '+thuis.inHet.replace(/^i/,'I')+' gaat er <b>'+M(Math.max(0,a.heffingTotaal))+'</b> per maand van af.'
+      : 'Van '+(zzp?'je winst':'je loon')+' gaat '+l.inHet+' <b>'+M(Math.max(0,b.heffingTotaal))+'</b> per maand naar belasting en bijdragen. '+thuis.inHet.replace(/^i/,'I')+' is dat <b>'+M(Math.max(0,a.heffingTotaal))+'</b>.';
+    $('kanniet').classList.toggle('hidden', !kanNiet || a.bruto<=0);
+    $('kanniet').innerHTML = kanNiet ? kanNiet+' Daarom tonen we voor '+l.naam+' geen bedragen.' : '';
+    var soort = zzp ? 'ondernemer' : 'loondienst';
+    $('pakket').classList.toggle('hidden', a.bruto<=0);
+    $('pakket').innerHTML = '<b>Let op: je krijgt er niet hetzelfde voor.</b> '+(l.pakket ? l.pakket[soort]+' ' : '')+(thuis.pakket ? thuis.pakket[soort] : '')
+      + ' Wat je overhoudt kun je daarom niet zomaar naast elkaar leggen.';
     $('balken').innerHTML = balk(thuis, a) + balk(l, b);
 
     var kb = function(r){ return r.toeslagen ? r.toeslagen.kinderbijslag : null; };
     var rijen = [
       [zzp?'Winst per maand':'Bruto loon per maand', M(a.bruto), M(b.bruto)],
-      ['Belasting en bijdragen per maand', M(a.heffingTotaal), M(b.heffingTotaal)],
-      ['Je houdt over per maand', M(a.netto), M(b.netto), true]
+      ['Belasting en bijdragen per maand', M(a.heffingTotaal), Mb(b.heffingTotaal)],
+      ['Je houdt over per maand', M(a.netto), Mb(b.netto), true]
     ];
+    if (thuis.zorgDaarnaast || l.zorgDaarnaast) rijen.push(['Zorgverzekering die je daarnaast zelf betaalt, per maand', thuis.zorgDaarnaast || 'onbekend', l.zorgDaarnaast || 'onbekend']);
     if (kb(a) || kb(b) || kb(b)===null) rijen.push(['Kinderbijslag per maand', M(kb(a)), M(kb(b))]);
     if (a.werkgever || b.werkgever) rijen.push(['Je werkgever betaalt daarbovenop, per maand',
       a.werkgever ? M(a.werkgever.totaalLaag)+' tot '+M(a.werkgever.totaalHoog) : '-',
@@ -331,8 +346,10 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
     groepen.sort(function(x,y){ return (x.g.id==='rest')-(y.g.id==='rest') || Math.max(y.a,y.b)-Math.max(x.a,x.b); });
     var max = Math.max.apply(null, groepen.map(function(x){ return Math.max(x.a,x.b); }));
     // Minder dan 50 cent per maand tonen we als geen belasting, net als op de hoofdpagina
-    var betaaltA = a.heffingTotaal >= 6, betaaltB = b.heffingTotaal >= 6;
-    $('verdeel').innerHTML = (betaaltA || betaaltB)
+    var betaaltA = a.heffingTotaal >= 6, betaaltB = !kanNiet && b.heffingTotaal >= 6;
+    $('verdeel').innerHTML = kanNiet
+      ? (betaaltA ? 'Je betaalt <b>'+M(a.heffingTotaal)+'</b> per maand '+thuis.inHet+'. ' : '')+'Voor '+l.naam+' tonen we hoe de overheid elke € 100 verdeelt.'
+      : (betaaltA || betaaltB)
       ? 'Je betaalt <b>'+M(Math.max(0,a.heffingTotaal))+'</b> per maand '+thuis.inHet+' en <b>'+M(Math.max(0,b.heffingTotaal))+'</b> '+l.inHet+'. Zo wordt dat verdeeld.'
       : 'Je betaalt nu geen belasting over je '+(zzp?'winst':'loon')+'. Zo verdeelt de overheid in elk land elke € 100 die ze uitgeeft.';
     var k = inv.kinderen, personen = 1 + (inv.partner?1:0) + k.k0tot5 + k.k6tot11 + k.k12tot15 + k.k16en17;
@@ -354,7 +371,7 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
           return '<div class="swapkop">'+naam+'</div><div class="swap"><div class="gain"><span class="l">Je houdt over</span><b>'+M(houd)+'</b><span class="small">per maand</span></div>'
             + '<div class="cost"><span class="l">Je betaalt zelf</span><b>'+M(zelf)+'</b><span class="small">per maand</span></div></div>';
         };
-        c += paar(thuis.naam, ja, ppA*personen) + paar(l.naam, jb, ppB*personen)
+        c += paar(thuis.naam, ja, ppA*personen) + paar(l.naam, kanNiet ? null : jb, ppB*personen)
           + '<p>Verdeeld over alle inwoners kost dit '+M(ppA)+' per persoon per maand '+thuis.inHet+' en '+M(ppB)+' '+l.inHet+'. '
           + (personen===1 ? 'Je huishouden telt 1 persoon.' : 'Je huishouden telt '+personen+' personen.')+'</p>';
       }
@@ -367,9 +384,10 @@ ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
     }).join('');
     $('sum').classList.toggle('hidden', !n);
     document.querySelector('.wrap').classList.toggle('metsom', !!n);
-    var saldo = function(naam, t){ var s = t.houd - t.zelf;
+    var saldo = function(naam, t, onbekend){ var s = t.houd - t.zelf;
+      if (onbekend) return '<span><span class="l">'+naam+': per maand</span><b>onbekend</b></span>';
       return '<span><span class="l">'+naam+': per maand '+(s>=0?'beter af':'slechter af')+'</span><b>'+M(Math.abs(s))+'</b></span>'; };
-    $('sum-in').innerHTML = saldo(thuis.naam, tot.a) + saldo(l.naam, tot.b);
+    $('sum-in').innerHTML = saldo(thuis.naam, tot.a) + saldo(l.naam, tot.b, !!kanNiet);
     var pp = function(d){ return E(d.UITGAVEN_TOTAAL*1e9/d.INWONERS); };
     $('uit-uitleg').textContent = 'Uitgaven van de hele overheid samen in '+db.JAAR_CIJFERS+', voor beide landen uit dezelfde cijfers van Eurostat. '
       + thuis.naam+' gaf '+num1.format(da.UITGAVEN_TOTAAL)+' miljard euro uit, dat is '+pp(da)+' per inwoner. '

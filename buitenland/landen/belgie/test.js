@@ -95,6 +95,15 @@
   if (loon(40000, { gewest: 'vlaanderen', kinderen: { k6tot11: 1 } }).toeslagen.kinderbijslag !== null) { fout++; log('FOUT kinderbijslag oudere kinderen hoort null te zijn'); }
   else log('OK   Kinderbijslag voor oudere kinderen is onbekend');
 
+  // Onder het minimumloon voor een voltijdse baan (€ 2.233,61 per maand) geeft het model geen betrouwbare uitkomst
+  check('Hoogste minimumloon per maand in 2026', B.minimumloonMaand(P), 2233.61, 0.001);
+  if (!loon(24000).onbetrouwbaar) { fout++; log('FOUT loon onder het minimumloon hoort als onbetrouwbaar gemeld te worden'); }
+  else log('OK   Loon onder het minimumloon wordt gemeld');
+  if (loon(27000).onbetrouwbaar || loon(0).onbetrouwbaar) { fout++; log('FOUT loon boven het minimumloon (of geen loon) hoort niet gemeld te worden'); }
+  else log('OK   Loon boven het minimumloon wordt niet gemeld');
+  if (B.bereken({ type: 'ondernemer', omzet: 20000, kosten: 0 }).onbetrouwbaar) { fout++; log('FOUT het minimumloon geldt niet voor een eigen bedrijf'); }
+  else log('OK   Het minimumloon geldt niet voor een eigen bedrijf');
+
   // ---- Controles op de uitgavencijfers ----
   var som = function (l) { return l.reduce(function (a, x) { return a + x.mld; }, 0); };
   check('Uitgaven tellen op tot het totaal', som(D.UITGAVEN), D.UITGAVEN_TOTAAL, 0.0002);

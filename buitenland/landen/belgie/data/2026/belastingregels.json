@@ -196,6 +196,35 @@
     ],
     "bbszSamenMax": 154.92,
     "bbszSamenEenInkomenMax": 182.82,
+    "minimumloon": [
+      {
+        "maanden": [
+          1,
+          2,
+          3
+        ],
+        "bedrag": 2154.11
+      },
+      {
+        "maanden": [
+          4,
+          5,
+          6
+        ],
+        "bedrag": 2189.81
+      },
+      {
+        "maanden": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "bedrag": 2233.61
+      }
+    ],
     "werkgeverBasis": 0.1988,
     "werkgeverLoonmatiging": 0.0512,
     "zelfstandige": {
@@ -243,6 +272,7 @@
     "fiscaleWerkbonus": "https://blog.forumforthefuture.be/nl/article/circulaire-2026c89-over-de-verhoging-van-de-fiscale-werkbonus/32703",
     "bbsz": "https://www.socialsecurity.be/employer/instructions/dmfa/nl/latest/instructions/special_contributions/other_specialcontributions/specialsocialsecuritycontribution.html",
     "zelfstandigen": "https://socialsecurity.belgium.be/sites/default/files/content/docs/nl/sociaal-beleid-vorm-geven/zelfstandigen/bijdragennota_2026_tabel_nl.pdf",
-    "groeipakket": "https://www.vlaanderen.be/vlaams-groeipakket/bedragen-en-betaaldata"
+    "groeipakket": "https://www.vlaanderen.be/vlaams-groeipakket/bedragen-en-betaaldata",
+    "minimumloon": "https://www.securex.be/nl/lex4you/werkgever/actuele-bedragen/sociaalrechtelijke-bedragen/nationaal-gmmi"
   }
 }

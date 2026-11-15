@@ -88,6 +88,13 @@
     return z.pct1 * Math.min(basis, z.grens1) + z.pct2 * Math.max(0, Math.min(basis, z.grens2) - z.grens1);
   }
 
+  // Hoogste minimumloon per maand in het jaar. Het model rekent met twaalf gelijke maandlonen.
+  function minimumloonMaand(p) {
+    var m = 0;
+    for (var i = 0; i < (p.minimumloon || []).length; i++) m = Math.max(m, p.minimumloon[i].bedrag);
+    return m;
+  }
+
   /*
    * invoer: dezelfde velden als site/model.js:
    *   type: 'loondienst' | 'ondernemer', brutoLoon, omzet, kosten,
@@ -106,7 +113,8 @@
     var partner = !!invoer.partner, gehuwd = partner && !!invoer.gehuwd;
     var partnerInkomen = partner ? Math.max(0, invoer.partnerInkomen || 0) : 0;
     var zzp = invoer.type === 'ondernemer';
-    var r = { land: 'belgie', type: invoer.type, som: [], nietMeegenomen: [], onbekend: [] };
+    // onbetrouwbaar: als hier een tekst staat, klopt de uitkomst niet en hoort de pagina geen bedragen te tonen
+    var r = { land: 'belgie', type: invoer.type, som: [], nietMeegenomen: [], onbekend: [], onbetrouwbaar: null };
     function rij(naam, bedrag, totaal) { r.som.push({ naam: naam, bedrag: bedrag, totaal: !!totaal }); }
 
     var belastbaar, sociaal = 0, wb = { a: 0, b: 0, totaal: 0 }, bbsz = 0;
@@ -136,6 +144,15 @@
       belastbaar = belastbaarBruto - kosten;
       var soort = !gehuwd ? 'alleen' : partnerInkomen > 0 ? 'samenTweeInkomens' : 'samenEenInkomen';
       bbsz = 4 * bbszKwartaal(bruto / 12, p, soort);
+      // Onder het minimumloon voor een voltijdse baan werk je deeltijd. De werkbonus hangt dan af van je uren,
+      // en die vragen we niet. Het model rekent wel door, maar de uitkomst is te gunstig. Zie OPEN-PUNTEN.md, punt B10.
+      var minLoon = minimumloonMaand(p);
+      if (bruto > 0 && bruto / 12 < minLoon) {
+        r.onbetrouwbaar = 'Dit loon is lager dan het Belgische minimumloon voor een voltijdse baan (€ '
+          + minLoon.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' per maand, € '
+          + String(Math.ceil(minLoon * 12)).replace(/\B(?=(\d{3})+$)/g, '.') + ' per jaar). Je werkt dan deeltijd. '
+          + 'In België hangt de korting op je bijdragen af van hoeveel uren je werkt, en dat vragen we niet.';
+      }
       r.bruto = bruto; r.rsz = rsz; r.werkbonus = wb; r.belastbaarBruto = belastbaarBruto; r.beroepskosten = kosten;
       rij('Bruto salaris', bruto, true);
       rij('Bijdrage sociale zekerheid (13,07%)', -rsz);
@@ -210,7 +227,7 @@
     return r;
   }
 
-  var api = { P2026: P2026, BRONNEN: R.BRONNEN, bereken: bereken, schijven: schijven, belastingvrijeSom: belastingvrijeSom,
+  var api = { P2026: P2026, BRONNEN: R.BRONNEN, bereken: bereken, minimumloonMaand: minimumloonMaand, schijven: schijven, belastingvrijeSom: belastingvrijeSom,
               forfaitaireBeroepskosten: forfaitaireBeroepskosten, werkbonusMaand: werkbonusMaand, werkbonusJaar: werkbonusJaar,
               bbszKwartaal: bbszKwartaal, socialeBijdragenZelfstandige: socialeBijdragenZelfstandige };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;

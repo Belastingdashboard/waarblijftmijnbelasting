@@ -12,6 +12,9 @@
  *   data            object met UITGAVEN, UITGAVEN_TOTAAL, GROEPEN, JAAR_CIJFERS en INWONERS (zelfde groepen in elk land)
  *   velden          extra vragen die alleen voor dit land gelden (zie België)
  *   nietMeegenomen  wat voor dit land altijd buiten de som blijft
+ *   pakket          per soort werk: wat je in dit land wel of niet krijgt voor de belasting en bijdragen in de som.
+ *                   Landen regelen zorg en pensioen verschillend; zonder deze uitleg lijkt het ene land te goedkoop.
+ *   zorgDaarnaast   tekst voor de tabel: wat je in dit land naast de som nog zelf betaalt voor je zorgverzekering
  *   bronnen         [naam, link]
  */
 (function (root) {
@@ -45,15 +48,25 @@
   }
 
   var B = root.RegelsBelgie.BRONNEN;
+  function euro(x) { return '€ ' + String(Math.round(x)).replace(/\B(?=(\d{3})+$)/g, '.'); }
   var LANDEN = [
     {
       id: 'nederland', naam: 'Nederland', inHet: 'in Nederland', status: 'af', jaar: 2026,
       model: { bereken: function (invoer) { var r = root.Belasting.bereken(invoer); r.som = somNederland(r); return r; } },
       data: root.DataNederland,
       velden: [],
-      nietMeegenomen: ['Je zorgpremie en eigen risico. Die betaal je aan je verzekeraar.'],
+      nietMeegenomen: ['Je zorgpremie en eigen risico. Die betaal je aan je verzekeraar.',
+        'Premie voor aanvullend pensioen via je werkgever. Die verschilt per pensioenfonds.'],
+      pakket: {
+        loondienst: 'In Nederland betaal je daarnaast zelf je zorgverzekering: gemiddeld ' + euro(root.Belasting.P2026.zorgpremieGemiddeld / 12)
+          + ' per maand. Veel werknemers betalen ook premie voor aanvullend pensioen. Hoeveel dat is verschilt per pensioenfonds; dat weten we niet.',
+        ondernemer: 'In Nederland betaal je daarnaast zelf je zorgverzekering: gemiddeld ' + euro(root.Belasting.P2026.zorgpremieGemiddeld / 12)
+          + ' per maand. Pensioen en een verzekering tegen arbeidsongeschiktheid regel je als ondernemer zelf.'
+      },
+      zorgDaarnaast: euro(root.Belasting.P2026.zorgpremieGemiddeld / 12) + ' (gemiddeld)',
       bronnen: [
         ['Belastingdienst: tarieven 2026', root.Belasting.BRONNEN.loonheffingen],
+        ['Rijksoverheid: premie zorgverzekering', root.Belasting.BRONNEN.zorgpremie],
         ['Eurostat: uitgaven van de overheid naar functie', root.DataNederland.BRON.eurostatCofog]
       ]
     },
@@ -71,6 +84,11 @@
         { id: 'gehuwd', soort: 'vink', label: 'Ik ben gehuwd of woon wettelijk samen', alleenMet: 'partner',
           uitleg: 'Dan word je in België samen belast.' }
       ],
+      pakket: {
+        loondienst: 'In België zitten je wettelijk pensioen, de ziekteverzekering en de werkloosheidsverzekering in de bijdrage van 13,07% die van je loon afgaat.',
+        ondernemer: 'In België zitten je wettelijk pensioen en de ziekteverzekering in je sociale bijdragen als zelfstandige.'
+      },
+      zorgDaarnaast: 'zit in de bijdragen',
       nietMeegenomen: [
         'Vakantiegeld en een dertiende maand. Die worden in België anders belast.',
         'Koophuis en huur. De regels verschillen per gewest.',
@@ -86,6 +104,7 @@
         ['RSZ: bijzondere bijdrage sociale zekerheid', B.bbsz],
         ['FOD Sociale Zekerheid: bijdragen zelfstandigen', B.zelfstandigen],
         ['Vlaanderen: Groeipakket', B.groeipakket],
+        ['Securex: minimumloon (geen officiële bron)', B.minimumloon],
         ['Statbel: aantal inwoners', root.DataBelgie.BRON.statbelBevolking],
         ['Eurostat: uitgaven van de overheid naar functie', root.DataBelgie.BRON.eurostatCofog]
       ]

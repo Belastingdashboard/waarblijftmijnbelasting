@@ -103,6 +103,26 @@ Het basisbedrag van € 190,66 per maand is het bedrag "sinds 1 september 2026".
 
 De Belgische Eurostat-cijfers over 2024 zijn voorlopig en kunnen nog wijzigen. Het aantal inwoners is van 1 januari 2026; de uitgaven zijn van 2024. Een bedrag per inwoner mengt dus twee jaren.
 
+### B10. Lonen onder het minimumloon (toegevoegd op 15 november 2026)
+
+Het model rekent iedereen als voltijds werknemer (C6). Wie een jaarloon invult dat lager is dan het minimumloon voor een voltijdse baan, werkt in werkelijkheid deeltijd. De werkbonus wordt dan berekend op het voltijdse loon en daarna verminderd naar het aantal gewerkte uren. Het model deed dat niet en gaf daardoor een veel te hoge werkbonus. Dat was de oorzaak van het netto dat boven het bruto uitkwam (B4).
+
+**Wat er nu gebeurt.** Ligt het maandloon onder het hoogste minimumloon van 2026 (€ 2.233,61 per maand, € 26.804 per jaar), dan zet het model `onbetrouwbaar` en toont de vergelijkingspagina voor België geen bedragen.
+
+**Bron.** De bedragen van het minimumloon (GGMMI: € 2.154,11 van januari tot en met maart, € 2.189,81 van april tot en met juni, € 2.233,61 vanaf juli) komen van Securex, dat verwijst naar cao nr. 43 van de Nationale Arbeidsraad. **Geen officiële bron gelezen.** De exacte ingangsdata staan er niet bij.
+
+**Echte oplossing.** Vragen hoeveel procent iemand werkt en de werkbonus volgens de RSZ-regels voor deeltijd berekenen. Die regels staan in dezelfde RSZ-instructies als de werkbonus en zijn niet overgenomen.
+
+**Wat blijft.** Of de fiscale werkbonus wordt uitbetaald als er geen belasting meer verschuldigd is, is nog steeds niet in een officiële tekst nagelezen (B4). Net boven het minimumloon weegt dat nog mee.
+
+### B11. De twee landen betalen niet voor hetzelfde (toegevoegd op 15 november 2026)
+
+In België zitten het wettelijk pensioen, de ziekteverzekering en de werkloosheidsverzekering in de bijdrage van 13,07% die van het loon afgaat. In Nederland betaalt een werknemer de zorgpremie apart aan de verzekeraar en meestal premie voor aanvullend pensioen aan een pensioenfonds; de werknemersverzekeringen betaalt de werkgever. Geen van die Nederlandse bedragen zit in "belasting en bijdragen".
+
+**Wat er nu gebeurt.** De kop van de vergelijking noemt alleen wat er in elk land van het loon afgaat, niet meer wie er meer overhoudt. Daaronder staat een blok "je krijgt er niet hetzelfde voor", en de tabel heeft een rij voor de zorgverzekering (Nederland: gemiddelde premie 2026 uit `site/model.js`; België: zit in de bijdragen).
+
+**Wat ontbreekt.** De pensioenpremie in Nederland is onbekend; die verschilt per pensioenfonds. Ook het aanvullend pensioen in België, de ziekenfondsbijdrage en het eigen risico of remgeld zijn niet opgenomen. Een eerlijke vergelijking van wat iemand overhoudt is daardoor nog niet mogelijk.
+
 ## C. Aannames in het rekenmodel
 
 | Nr | Aanname | Waarom |
@@ -152,7 +172,7 @@ De Belgische Eurostat-cijfers over 2024 zijn voorlopig en kunnen nog wijzigen. H
 
 ## Wat is getoetst
 
-`test.js` in deze map doet 51 controles. `landen/nederland/test.js` doet er 6 op de Nederlandse Eurostat-cijfers, waaronder of beide landen hetzelfde jaar en dezelfde groepen gebruiken. Alleen het eerste blok is een echt rekenvoorbeeld van de overheid:
+`test.js` in deze map doet 54 controles. `landen/nederland/test.js` doet er 6 op de Nederlandse Eurostat-cijfers, waaronder of beide landen hetzelfde jaar en dezelfde groepen gebruiken. Alleen het eerste blok is een echt rekenvoorbeeld van de overheid:
 
 - **Rekenvoorbeeld FOD Financiën** (inkomstenjaar 2025, belastbaar inkomen € 38.000): € 10.484,50. Het model komt op hetzelfde bedrag.
 - De andere controles toetsen of het model de tabellen goed toepast op de schijfgrenzen (schijven, belastingvrije som, beroepskosten, werkbonus, bijzondere bijdrage, minimum en maximum voor zelfstandigen) en of de sommen sluiten.
