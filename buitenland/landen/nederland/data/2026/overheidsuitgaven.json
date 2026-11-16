@@ -1,0 +1,182 @@
+{
+  "beschrijving": "Nederland: uitgaven en inkomsten van de gezamenlijke overheid, en het aantal inwoners.",
+  "land": "nederland",
+  "jaarVanDeCijfers": 2024,
+  "gecontroleerdOp": "2026-11-14",
+  "letOp": "Gerealiseerde cijfers over 2024 van de hele overheid samen (Eurostat), voor beide landen uit dezelfde tabellen. De Nederlandse site zelf gebruikt de rijksbegroting 2026; die cijfers staan in data/2026/rijksuitgaven.json. Zie landen/belgie/OPEN-PUNTEN.md, deel A.",
+  "eenheden": "mld = miljard euro.",
+  "inwoners": {
+    "aantal": 18130208,
+    "peildatum": "2026-01-01",
+    "bron": "https://opendata.cbs.nl/statline/#/CBS/nl/dataset/82905NED"
+  },
+  "uitgaven": {
+    "totaalMld": 498.516,
+    "bron": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_exp/default/table?lang=en",
+    "onderdelen": [
+      {
+        "id": "gf10",
+        "naam": "Sociale bescherming",
+        "mld": 186.03,
+        "uitleg": "AOW, uitkeringen bij ziekte, arbeidsongeschiktheid en werkloosheid, bijstand, kinderbijslag en toeslagen."
+      },
+      {
+        "id": "gf07",
+        "naam": "Gezondheid",
+        "mld": 81.501,
+        "uitleg": "Huisarts, ziekenhuis en medicijnen."
+      },
+      {
+        "id": "gf09",
+        "naam": "Onderwijs",
+        "mld": 57.152,
+        "uitleg": "Basisscholen, middelbare scholen, mbo, hbo en universiteiten."
+      },
+      {
+        "id": "gf04",
+        "naam": "Economische zaken",
+        "mld": 49.487,
+        "uitleg": "Wegen, spoor en openbaar vervoer, steun aan bedrijven, landbouw en energie."
+      },
+      {
+        "id": "gf01",
+        "naam": "Algemeen overheidsbestuur",
+        "mld": 46.19,
+        "uitleg": "Parlement, regering, Belastingdienst, bijdrage aan de Europese Unie en de rente op de staatsschuld."
+      },
+      {
+        "id": "gf03",
+        "naam": "Openbare orde en veiligheid",
+        "mld": 21.598,
+        "uitleg": "Politie, brandweer, rechtbanken en gevangenissen."
+      },
+      {
+        "id": "gf02",
+        "naam": "Defensie",
+        "mld": 18.279,
+        "uitleg": "Het leger en materieel."
+      },
+      {
+        "id": "gf05",
+        "naam": "Milieubescherming",
+        "mld": 17.941,
+        "uitleg": "Afval, afvalwater en natuur."
+      },
+      {
+        "id": "gf08",
+        "naam": "Recreatie, cultuur en godsdienst",
+        "mld": 13.424,
+        "uitleg": "Sport, cultuur en omroep."
+      },
+      {
+        "id": "gf06",
+        "naam": "Huisvesting en gemeenschapsvoorzieningen",
+        "mld": 6.914,
+        "uitleg": "Woningbouw, ruimtelijke ordening, watervoorziening en straatverlichting."
+      }
+    ]
+  },
+  "groepenOpDeSite": {
+    "opmerking": "Eigen indeling: officiële onderdelen samengevoegd tot begrijpelijke groepen. \"delen\" verwijst naar de id van de onderdelen hierboven.",
+    "groepen": [
+      {
+        "id": "sociaal",
+        "naam": "AOW en vangnet",
+        "delen": [
+          "gf10"
+        ],
+        "uitleg": "AOW als je oud bent. Geld als je ziek wordt of je baan verliest. En kinderbijslag."
+      },
+      {
+        "id": "zorg",
+        "naam": "Zorg",
+        "delen": [
+          "gf07"
+        ],
+        "uitleg": "De huisarts, het ziekenhuis en medicijnen."
+      },
+      {
+        "id": "bestuur",
+        "naam": "Bestuur en rente op schulden",
+        "delen": [
+          "gf01"
+        ],
+        "uitleg": "Regeringen en parlementen, de belastingdienst, de bijdrage aan Europa en de rente op geleend geld."
+      },
+      {
+        "id": "economie",
+        "naam": "Wegen, vervoer en economie",
+        "delen": [
+          "gf04"
+        ],
+        "uitleg": "Wegen, treinen, bussen en steun aan bedrijven en landbouw."
+      },
+      {
+        "id": "onderwijs",
+        "naam": "School en studie",
+        "delen": [
+          "gf09"
+        ],
+        "uitleg": "De basisschool, de middelbare school, mbo, hbo en universiteit."
+      },
+      {
+        "id": "veiligheid",
+        "naam": "Veiligheid",
+        "delen": [
+          "gf02",
+          "gf03"
+        ],
+        "uitleg": "Het leger, de politie, de brandweer, rechters en gevangenissen."
+      },
+      {
+        "id": "wonen",
+        "naam": "Wonen",
+        "delen": [
+          "gf06"
+        ],
+        "uitleg": "Woningbouw en ruimtelijke ordening."
+      },
+      {
+        "id": "rest",
+        "naam": "Al het andere",
+        "delen": [
+          "gf08",
+          "gf05"
+        ],
+        "uitleg": "Sport en cultuur, afval en natuur."
+      }
+    ]
+  },
+  "inkomsten": {
+    "totaalMld": 489.402,
+    "opmerking": "Totaal uit gov_10a_main, posten uit gov_10a_taxag. De rest is \"overige inkomsten\": het totaal min de genoemde posten.",
+    "bron": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_main/default/table?lang=en",
+    "bronPosten": "https://ec.europa.eu/eurostat/databrowser/view/gov_10a_taxag/default/table?lang=en",
+    "posten": [
+      {
+        "naam": "Belasting op inkomen van personen",
+        "mld": 109.881
+      },
+      {
+        "naam": "Btw",
+        "mld": 79.022
+      },
+      {
+        "naam": "Sociale bijdragen van werknemers en zelfstandigen",
+        "mld": 76.536
+      },
+      {
+        "naam": "Sociale bijdragen van werkgevers",
+        "mld": 58.353
+      },
+      {
+        "naam": "Winstbelasting bedrijven (vennootschapsbelasting)",
+        "mld": 48.078
+      },
+      {
+        "naam": "Accijnzen",
+        "mld": 14.103
+      }
+    ]
+  }
+}

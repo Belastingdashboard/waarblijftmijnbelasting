@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Andere landen vergelijken</title>
+<link rel="icon" href="../site/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#1e3a2b">
+<style>
+:root{
+  --page:#dfe2d5; --paper:#f5f3ea; --forest:#1e3a2b; --lime:#c9f26c;
+  --ink:#1b241f; --soft:#5d6a61; --line:#d9d6c8; --sun:#f4b63f; --clay:#b9502f; --clay-soft:#f6e1d6; --mint:#e1efd0;
+  --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:17px/1.55 var(--sans)}
+.wrap{max-width:620px;margin:0 auto;padding:16px 16px 60px}
+.card{background:var(--paper);border-radius:22px;padding:24px 22px;margin-top:16px}
+.hero{background:var(--forest);color:var(--paper);padding:28px 22px 26px}
+.brand{font:600 1.05rem var(--serif);color:var(--lime);letter-spacing:.01em;text-decoration:none}
+h1{font:500 clamp(1.9rem,7.5vw,2.5rem)/1.12 var(--serif);margin:.5em 0 .4em;letter-spacing:-.01em}
+h2{font:500 1.6rem/1.2 var(--serif);margin:.5em 0 .3em}
+h3{font:600 1.08rem/1.3 var(--sans);margin:0}
+p{margin:.5em 0}
+.hero p{color:#d5dccd;max-width:36ch}
+.tagrow{display:flex;align-items:center;gap:8px}
+.nr{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--lime);color:var(--forest);font:600 .72rem var(--mono)}
+.pill{display:inline-block;padding:7px 14px;border-radius:999px;background:var(--forest);color:var(--paper);font:600 .68rem var(--mono);letter-spacing:.09em;text-transform:uppercase}
+.soft{color:var(--soft)} .small{font-size:.9rem}
+a{color:var(--forest)}
+.hero a.terug{color:#d5dccd;font-size:.9rem}
+.warn{background:var(--clay-soft);border-radius:14px;padding:14px 16px;margin-top:14px}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0 6px}
+.choice button{border:2px solid var(--forest);background:transparent;color:var(--forest);border-radius:14px;padding:13px 8px;font:600 1rem var(--sans);cursor:pointer}
+.choice button[aria-pressed="true"]{background:var(--forest);color:var(--paper)}
+label.q{display:block;font:500 1.25rem/1.25 var(--serif);margin-top:18px}
+.money{display:flex;align-items:center;gap:8px;margin-top:10px;background:#fff;border:2px solid var(--forest);border-radius:14px;padding:6px 14px}
+.money span{font:500 1.6rem var(--serif)}
+.money input{flex:1;min-width:0;border:0;background:transparent;font:500 1.9rem var(--serif);color:var(--ink);padding:6px 0;outline:0}
+.money:focus-within{box-shadow:0 0 0 3px var(--lime)}
+.money small{color:var(--soft);white-space:nowrap}
+select.groot{width:100%;margin-top:10px;padding:12px 14px;border:2px solid var(--forest);border-radius:14px;background:#fff;font:500 1.3rem var(--serif);color:var(--ink)}
+details{margin-top:16px}
+summary{cursor:pointer;font-weight:600;color:var(--forest);list-style:none;display:flex;align-items:center;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--lime);color:var(--forest);font:700 1rem var(--mono);flex:none}
+details[open]>summary::before{content:"–"}
+.inner{padding:12px 0 2px}
+.field{margin-top:14px}
+.field>label{display:block;font-weight:600}
+.field input[type=number],.field select{width:100%;margin-top:6px;padding:11px 12px;border:2px solid var(--line);border-radius:12px;background:#fff;font:inherit;color:var(--ink)}
+.kids{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.check{display:flex;gap:10px;align-items:flex-start;margin-top:14px}
+.check input{width:22px;height:22px;margin-top:2px;accent-color:var(--forest);flex:none}
+.bigline{font:500 clamp(1.4rem,5.6vw,1.85rem)/1.25 var(--serif);margin:.6em 0 .5em}
+.bigline b{background:var(--lime);padding:0 .18em;border-radius:6px;font-weight:600;white-space:nowrap}
+.landrij{margin-top:16px}
+.landrij .kop{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.landrij .kop b{font:600 1.05rem var(--sans)}
+.hundred{display:flex;height:34px;border-radius:10px;overflow:hidden;margin:6px 0 2px}
+.hundred div{display:flex;align-items:center;padding:0 10px;font:600 .8rem var(--mono);white-space:nowrap;overflow:hidden}
+.hundred .you{background:var(--forest);color:var(--paper)} .hundred .tax{background:var(--sun);color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+td,th{padding:8px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.tot td{font-weight:700}
+.scroll{overflow-x:auto}
+.item{border-top:1.5px solid var(--line);padding:16px 0}
+.item:first-child{border-top:0}
+.duo{display:grid;grid-template-columns:auto 1fr auto;gap:4px 10px;align-items:center;margin-top:10px;font-size:.9rem}
+.duo .n{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap}
+.meter{height:8px;border-radius:5px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--forest);border-radius:5px}
+.meter.b i{background:var(--sun)}
+.item.off .meter i{background:#a9b0a4}
+.item.off h3{text-decoration:line-through;text-decoration-color:#a9b0a4}
+.stop{display:flex;align-items:center;gap:10px;margin-top:12px;font-weight:600;cursor:pointer}
+.switch{position:relative;width:50px;height:28px;flex:none}
+.switch input{position:absolute;inset:0;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.switch span{position:absolute;inset:0;border-radius:14px;background:var(--forest);transition:background .15s;pointer-events:none}
+.switch span::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .15s;transform:translateX(22px)}
+.switch input:not(:checked)+span{background:#a9b0a4}
+.switch input:not(:checked)+span::after{transform:none}
+.switch input:focus-visible+span{outline:3px solid var(--sun);outline-offset:2px}
+.swapkop{font-weight:600;margin-top:12px}
+.swap{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.swap div{border-radius:14px;padding:10px 14px}
+.swap .l{font:600 .64rem var(--mono);letter-spacing:.07em;text-transform:uppercase}
+.swap b{display:block;font:500 1.4rem var(--serif);font-variant-numeric:tabular-nums}
+.gain{background:var(--mint)} .cost{background:var(--clay-soft)} .cost b{color:var(--clay)}
+.sum{position:fixed;left:0;right:0;bottom:12px;z-index:5;pointer-events:none}
+.sum>div{pointer-events:auto;max-width:588px;margin:0 16px;background:var(--forest);color:var(--paper);border-radius:18px;padding:12px 18px;display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;box-shadow:0 8px 24px rgba(20,40,28,.3)}
+@media (min-width:652px){.sum>div{margin:0 auto}}
+.sum b{font:500 1.2rem var(--serif);color:var(--lime);font-variant-numeric:tabular-nums}
+.sum .l{font:600 .64rem var(--mono);letter-spacing:.07em;text-transform:uppercase;display:block;color:#d5dccd}
+.wrap.metsom{padding-bottom:140px}
+.note{background:var(--mint);border-radius:14px;padding:14px 16px;margin-top:14px}
+.foot{padding:8px 22px 28px;color:var(--soft);font-size:.9rem;line-height:1.5}
+.hidden{display:none}
+ul{padding-left:1.2em;margin:.4em 0} li{margin:.3em 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="card hero">
+    <a class="brand" href="../site/index.html">waarblijftmijnbelasting.nl</a>
+    <h1>Wat als je in een ander land woonde?</h1>
+    <p>Zelfde loon, ander land. Zie wat je daar aan belasting betaalt en waar het geld heen gaat.</p>
+    <p><a class="terug" href="../site/index.html">← Terug naar Nederland</a></p>
+  </header>
+
+  <section class="card" aria-labelledby="h1">
+    <div class="tagrow"><span class="nr">01</span><span class="pill">Jij en het land</span></div>
+    <h2 id="h1">Met welk land wil je vergelijken?</h2>
+    <select id="land" class="groot" aria-label="Land"></select>
+    <div class="warn hidden" id="proef"></div>
+
+    <div class="choice" role="group" aria-label="Soort werk">
+      <button type="button" id="b-loon" aria-pressed="true">Ik heb een baan</button>
+      <button type="button" id="b-ond" aria-pressed="false">Ik heb een eigen bedrijf</button>
+    </div>
+    <div id="f-bruto">
+      <label class="q" for="bruto">Wat is je bruto salaris per jaar?</label>
+      <div class="money"><span>€</span><input type="number" id="bruto" min="0" step="500" value="40000" inputmode="numeric"><small>per jaar</small></div>
+      <p class="small soft" id="t-over"></p>
+    </div>
+    <div id="f-ond" class="hidden">
+      <label class="q" for="omzet">Hoeveel komt er per jaar binnen in je bedrijf?</label>
+      <div class="money"><span>€</span><input type="number" id="omzet" min="0" step="1000" value="70000" inputmode="numeric"><small>per jaar</small></div>
+      <label class="q" for="kosten">Hoeveel geef je per jaar uit voor je bedrijf?</label>
+      <div class="money"><span>€</span><input type="number" id="kosten" min="0" step="500" value="10000" inputmode="numeric"><small>per jaar</small></div>
+    </div>
+
+    <details id="meer">
+      <summary>Partner, kinderen en vragen over het andere land</summary>
+      <div class="inner">
+        <label class="check"><input type="checkbox" id="partner"> <span>Ik woon samen met een partner</span></label>
+        <div id="f-partner" class="field hidden">
+          <label for="pink">Wat verdient je partner per jaar (bruto)?</label>
+          <input type="number" id="pink" min="0" step="500" value="0" inputmode="numeric">
+        </div>
+        <div class="field"><label>Hoeveel kinderen heb je?</label>
+          <div class="kids">
+            <div><span class="small soft">0 t/m 5 jaar</span><input type="number" id="k0" min="0" max="10" value="0" inputmode="numeric" aria-label="Kinderen van 0 tot en met 5 jaar"></div>
+            <div><span class="small soft">6 t/m 11 jaar</span><input type="number" id="k6" min="0" max="10" value="0" inputmode="numeric" aria-label="Kinderen van 6 tot en met 11 jaar"></div>
+            <div><span class="small soft">12 t/m 15 jaar</span><input type="number" id="k12" min="0" max="10" value="0" inputmode="numeric" aria-label="Kinderen van 12 tot en met 15 jaar"></div>
+            <div><span class="small soft">16 en 17 jaar</span><input type="number" id="k16" min="0" max="10" value="0" inputmode="numeric" aria-label="Kinderen van 16 en 17 jaar"></div>
+          </div>
+        </div>
+        <label class="check"><input type="checkbox" id="aow"> <span>Ik krijg AOW of pensioen</span></label>
+        <label class="check hidden" id="f-starter"><input type="checkbox" id="starter"> <span>Ik ben pas begonnen met mijn bedrijf</span></label>
+        <div id="land-velden"></div>
+      </div>
+    </details>
+  </section>
+
+  <section class="card" aria-labelledby="h2" aria-live="polite">
+    <div class="tagrow"><span class="nr">02</span><span class="pill">Dit betaal je</span></div>
+    <h2 id="h2" class="hidden">Dit betaal je in beide landen</h2>
+    <p class="bigline" id="zin"></p>
+    <div class="warn hidden" id="kanniet"></div>
+    <div id="balken"></div>
+    <div class="note small hidden" id="pakket"></div>
+    <div class="scroll" style="margin-top:14px"><table id="t-vgl"></table></div>
+    <div id="meldingen" class="small"></div>
+    <details>
+      <summary>Laat de hele som zien</summary>
+      <div class="inner" id="sommen"></div>
+    </details>
+  </section>
+
+  <section class="card" aria-labelledby="h3">
+    <div class="tagrow"><span class="nr">03</span><span class="pill">Dit krijg je ervoor</span></div>
+    <h2 id="h3">Waar gaat jouw belasting heen?</h2>
+    <p id="verdeel"></p>
+    <p class="soft">Zet een schuifje uit en kijk wat er gebeurt als de overheid ermee stopt. Wat houd je over in elk land? En wat betaal je dan zelf?</p>
+    <div id="cats"></div>
+    <details>
+      <summary>Hoe is "je betaalt zelf" berekend?</summary>
+      <div class="inner">
+        <p>We delen wat de overheid aan een groep uitgeeft door het aantal inwoners van dat land. Dat keer het aantal personen in je huishouden.</p>
+        <p>Het is een gemiddelde. Wie veel zorg nodig heeft of kinderen op school heeft, zou zelf veel meer betalen. Op de pagina over Nederland rekenen we voor zorg, school en AOW met preciezere bedragen. Voor andere landen hebben we die nog niet.</p>
+        <p class="soft" id="uit-uitleg"></p>
+      </div>
+    </details>
+  </section>
+
+  <section class="card" aria-labelledby="h4">
+    <div class="tagrow"><span class="nr">+</span><span class="pill">Eerlijk vergelijken</span></div>
+    <h2 id="h4">Wat deze vergelijking niet laat zien</h2>
+    <ul>
+      <li>Wat het leven kost: boodschappen, huur, huizenprijzen en energie.</li>
+      <li>Btw, accijnzen en lokale belastingen.</li>
+      <li>Wat je voor je belasting terugkrijgt. Zorg, pensioen en kinderopvang zijn in elk land anders geregeld.</li>
+      <li>Of je daar hetzelfde loon zou krijgen. We rekenen met hetzelfde bruto bedrag in beide landen.</li>
+    </ul>
+    <div id="niet"></div>
+    <details>
+      <summary>Bronnen</summary>
+      <div class="inner"><ul id="bronnen" class="small"></ul></div>
+    </details>
+  </section>
+
+  <footer class="foot">
+    <p>Deze pagina bewaart niets. Wat je invult blijft op je eigen telefoon of computer.</p>
+    <p>Dit is geen belastingadvies.</p>
+  </footer>
+</div>
+
+<div class="sum hidden" id="sum" aria-live="polite"><div id="sum-in"></div></div>
+
+<script src="../site/model.js"></script>
+<script src="../site/data.js"></script>
+<script src="landen/belgie/regels.js"></script>
+<script src="landen/belgie/model.js"></script>
+<script src="landen/belgie/data.js"></script>
+<script src="landen/nederland/data.js"></script>
+<script src="landen/index.js"></script>
+<script>
+(function(){
+  'use strict';
+  var L = window.Landen, thuis = L.zoek(L.thuis);
+  var $ = function(id){ return document.getElementById(id); };
+  var eur = new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR',maximumFractionDigits:0});
+  var num1 = new Intl.NumberFormat('nl-NL',{minimumFractionDigits:1,maximumFractionDigits:1});
+  var E = function(x){ return x===null || x===undefined ? 'onbekend' : eur.format(Math.round(x)); };
+  var M = function(x){ return x===null || x===undefined ? 'onbekend' : E(x/12); };
+  function val(id){ var v = parseFloat($(id).value); return isFinite(v) && v>0 ? v : 0; }
+  var type = 'loondienst', uit = {}, open = {};
+
+  // Wat de hoofdpagina meegeeft staat achter het hekje in het adres. Dat deel gaat niet naar een server.
+  var mee = {};
+  location.hash.replace(/^#/,'').split('&').forEach(function(d){ var kv = d.split('='); if (kv[0]) mee[kv[0]] = decodeURIComponent(kv[1]||''); });
+  function zet(id, sleutel){ var v = parseFloat(mee[sleutel]); if (isFinite(v) && v>=0) $(id).value = Math.round(v); }
+  if (mee.type === 'ondernemer') type = 'ondernemer';
+  zet('bruto','bruto'); zet('omzet','omzet'); zet('kosten','kosten'); zet('pink','pink');
+  zet('k0','k0'); zet('k6','k6'); zet('k12','k12'); zet('k16','k16');
+  ['partner','aow','starter'].forEach(function(id){ if (mee[id]==='1') $(id).checked = true; });
+  if (mee.partner==='1' || val('k0')+val('k6')+val('k12')+val('k16')>0 || mee.aow==='1') $('meer').open = true;
+  $('t-over').textContent = mee.bruto ? 'Overgenomen van wat je op de hoofdpagina invulde. Je kunt het hier aanpassen.' : 'Met vakantiegeld erbij.';
+
+  // Landkeuze: alle landen behalve Nederland
+  var anderen = L.lijst.filter(function(l){ return l.id !== L.thuis; });
+  $('land').innerHTML = anderen.map(function(l){ return '<option value="'+l.id+'">'+l.naam+(l.status==='proef'?' (proef)':'')+'</option>'; }).join('');
+  if (mee.land && L.zoek(mee.land) && mee.land !== L.thuis) $('land').value = mee.land;
+  function land(){ return L.zoek($('land').value); }
+
+  // Extra vragen van het gekozen land
+  function tekenVelden(){
+    var l = land();
+    $('land-velden').innerHTML = (l.velden.length ? '<h3 style="margin-top:22px">Vragen voor '+l.naam+'</h3>' : '') + l.velden.map(function(v){
+      var id = 'lv-'+v.id, uitleg = v.uitleg ? '<span class="small soft">'+v.uitleg+'</span>' : '';
+      if (v.soort==='vink') return '<div data-met="'+(v.alleenMet||'')+'"><label class="check"><input type="checkbox" id="'+id+'"> <span>'+v.label+'</span></label>'+uitleg+'</div>';
+      if (v.soort==='keuze') return '<div class="field" data-met="'+(v.alleenMet||'')+'"><label for="'+id+'">'+v.label+'</label><select id="'+id+'">'
+        + v.opties.map(function(o){ return '<option value="'+o[0]+'">'+o[1]+'</option>'; }).join('')+'</select>'+uitleg+'</div>';
+      return '<div class="field" data-met="'+(v.alleenMet||'')+'"><label for="'+id+'">'+v.label+'</label><input type="number" id="'+id+'" min="0" step="'+(v.stap||1)+'" inputmode="decimal">'+uitleg+'</div>';
+    }).join('');
+    l.velden.forEach(function(v){ var el = $('lv-'+v.id); el.addEventListener('input', teken); el.addEventListener('change', teken); });
+    $('proef').classList.toggle('hidden', l.status!=='proef');
+    $('proef').innerHTML = '<b>Proefversie.</b> De cijfers voor '+l.naam+' zijn nog niet door een mens nagekeken en een deel van de regels ontbreekt. Gebruik de uitkomst niet om iets te beslissen.';
+    $('bronnen').innerHTML = thuis.bronnen.concat(l.bronnen).map(function(b){ return '<li><a href="'+b[1]+'" target="_blank" rel="noopener">'+b[0]+'</a></li>'; }).join('');
+  }
+
+  function invoer(){
+    var inv = { type:type, brutoLoon:val('bruto'), omzet:val('omzet'), kosten:val('kosten'),
+      urencriterium:true, starter:$('starter').checked, aow:$('aow').checked,
+      partner:$('partner').checked, partnerInkomen:val('pink'),
+      kinderen:{k0tot5:Math.floor(val('k0')),k6tot11:Math.floor(val('k6')),k12tot15:Math.floor(val('k12')),k16en17:Math.floor(val('k16'))},
+      huur:0, woz:0, hypotheekrente:0 };
+    land().velden.forEach(function(v){
+      var el = $('lv-'+v.id); if (!el) return;
+      if (v.alleenMet && !inv[v.alleenMet]) return;
+      if (v.soort==='vink') inv[v.id] = el.checked;
+      else if (v.soort==='keuze') inv[v.id] = el.value || null;
+      else if (el.value !== '') { var x = parseFloat(el.value); if (isFinite(x) && x>=0) inv[v.id] = v.naar ? v.naar(x) : x; }
+    });
+    return inv;
+  }
+
+  function balk(l, r){
+    if (r.onbetrouwbaar) return '<div class="landrij"><div class="kop"><b>'+l.naam+'</b><span class="small soft">kunnen we voor dit loon niet uitrekenen</span></div></div>';
+    var p = r.bruto>0 ? Math.max(0, Math.min(100, r.heffingTotaal/r.bruto*100)) : 0;
+    return '<div class="landrij"><div class="kop"><b>'+l.naam+'</b><span class="small soft">van elke € 100 gaat € '+Math.round(p)+' naar belasting</span></div>'
+      + '<div class="hundred" aria-hidden="true"><div class="you" style="width:'+(100-p)+'%">voor jou</div><div class="tax" style="width:'+p+'%">'+(p>32?'belasting':'')+'</div></div></div>';
+  }
+  function somTabel(l, r){
+    if (r.onbetrouwbaar) return '<h3 style="margin-top:14px">'+l.naam+'</h3><p class="small">'+r.onbetrouwbaar+' Daarom tonen we geen som.</p>';
+    return '<h3 style="margin-top:14px">'+l.naam+'</h3><div class="scroll"><table><tr><th>Per jaar</th><th class="r"></th></tr>'
+      + r.som.map(function(x){ return '<tr'+(x.totaal?' class="tot"':'')+'><td>'+x.naam+'</td><td class="r">'+E(x.bedrag)+'</td></tr>'; }).join('')+'</table></div>';
+  }
+  function lijst(kop, punten){ return punten.length ? '<p><b>'+kop+'</b></p><ul>'+punten.map(function(x){ return '<li>'+x+'</li>'; }).join('')+'</ul>' : ''; }
+
+  function teken(){
+    var l = land(), inv = invoer(), zzp = type==='ondernemer';
+    $('b-loon').setAttribute('aria-pressed', !zzp); $('b-ond').setAttribute('aria-pressed', zzp);
+    $('f-bruto').classList.toggle('hidden', zzp); $('f-ond').classList.toggle('hidden', !zzp);
+    $('f-starter').classList.toggle('hidden', !zzp);
+    $('f-partner').classList.toggle('hidden', !inv.partner);
+    [].forEach.call($('land-velden').querySelectorAll('[data-met]'), function(el){
+      var met = el.getAttribute('data-met'); el.classList.toggle('hidden', !!met && !inv[met]);
+    });
+
+    var a = thuis.model.bereken(inv), b = l.model.bereken(inv);
+    // Kan het model van het andere land dit loon niet goed uitrekenen, dan tonen we voor dat land geen bedragen.
+    var kanNiet = b.onbetrouwbaar || null;
+    var Mb = function(x){ return kanNiet ? 'onbekend' : M(x); };
+    // De kop noemt alleen wat er van je loon afgaat. Wat je overhoudt is niet eerlijk te vergelijken,
+    // omdat je er in elk land iets anders voor krijgt (zie het blok "pakket" eronder).
+    $('zin').innerHTML = a.bruto<=0 ? 'Vul hierboven een bedrag in.'
+      : kanNiet ? 'Voor dit loon kunnen we '+l.naam+' <b>niet uitrekenen</b>. '+thuis.inHet.replace(/^i/,'I')+' gaat er <b>'+M(Math.max(0,a.heffingTotaal))+'</b> per maand van af.'
+      : 'Van '+(zzp?'je winst':'je loon')+' gaat '+l.inHet+' <b>'+M(Math.max(0,b.heffingTotaal))+'</b> per maand naar belasting en bijdragen. '+thuis.inHet.replace(/^i/,'I')+' is dat <b>'+M(Math.max(0,a.heffingTotaal))+'</b>.';
+    $('kanniet').classList.toggle('hidden', !kanNiet || a.bruto<=0);
+    $('kanniet').innerHTML = kanNiet ? kanNiet+' Daarom tonen we voor '+l.naam+' geen bedragen.' : '';
+    var soort = zzp ? 'ondernemer' : 'loondienst';
+    $('pakket').classList.toggle('hidden', a.bruto<=0);
+    $('pakket').innerHTML = '<b>Let op: je krijgt er niet hetzelfde voor.</b> '+(l.pakket ? l.pakket[soort]+' ' : '')+(thuis.pakket ? thuis.pakket[soort] : '')
+      + ' Wat je overhoudt kun je daarom niet zomaar naast elkaar leggen.';
+    $('balken').innerHTML = balk(thuis, a) + balk(l, b);
+
+    var kb = function(r){ return r.toeslagen ? r.toeslagen.kinderbijslag : null; };
+    var rijen = [
+      [zzp?'Winst per maand':'Bruto loon per maand', M(a.bruto), M(b.bruto)],
+      ['Belasting en bijdragen per maand', M(a.heffingTotaal), Mb(b.heffingTotaal)],
+      ['Je houdt over per maand', M(a.netto), Mb(b.netto), true]
+    ];
+    if (thuis.zorgDaarnaast || l.zorgDaarnaast) rijen.push(['Zorgverzekering die je daarnaast zelf betaalt, per maand', thuis.zorgDaarnaast || 'onbekend', l.zorgDaarnaast || 'onbekend']);
+    if (kb(a) || kb(b) || kb(b)===null) rijen.push(['Kinderbijslag per maand', M(kb(a)), M(kb(b))]);
+    if (a.werkgever || b.werkgever) rijen.push(['Je werkgever betaalt daarbovenop, per maand',
+      a.werkgever ? M(a.werkgever.totaalLaag)+' tot '+M(a.werkgever.totaalHoog) : '-',
+      b.werkgever ? (b.werkgever.totaalLaag===b.werkgever.totaalHoog ? M(b.werkgever.totaalLaag) : M(b.werkgever.totaalLaag)+' tot '+M(b.werkgever.totaalHoog)) : '-']);
+    $('t-vgl').innerHTML = '<tr><th></th><th class="r">'+thuis.naam+'</th><th class="r">'+l.naam+'</th></tr>'
+      + rijen.map(function(r){ return '<tr'+(r[3]?' class="tot"':'')+'><td>'+r[0]+'</td><td class="r">'+r[1]+'</td><td class="r">'+r[2]+'</td></tr>'; }).join('');
+    $('meldingen').innerHTML = lijst('Dit weten we niet voor '+l.naam, b.onbekend || []) + lijst('Niet meegerekend voor '+l.naam+' bij wat je invulde', b.nietMeegenomen || []);
+    $('sommen').innerHTML = somTabel(thuis, a) + somTabel(l, b);
+
+    // Waar gaat het geld heen: zelfde groepen in beide landen
+    var da = thuis.data, db = l.data;
+    var deel = function(d){ var o = {}; d.UITGAVEN.forEach(function(u){ o[u.id] = u; }); return o; };
+    var pa = deel(da), pb = deel(db);
+    var aandeel = function(g, delen, d){ return g.delen.reduce(function(s,id){ return s+delen[id].mld; },0)/d.UITGAVEN_TOTAAL; };
+    var groepen = db.GROEPEN.map(function(g){ return { g:g, a:aandeel(g,pa,da), b:aandeel(g,pb,db) }; });
+    groepen.sort(function(x,y){ return (x.g.id==='rest')-(y.g.id==='rest') || Math.max(y.a,y.b)-Math.max(x.a,x.b); });
+    var max = Math.max.apply(null, groepen.map(function(x){ return Math.max(x.a,x.b); }));
+    // Minder dan 50 cent per maand tonen we als geen belasting, net als op de hoofdpagina
+    var betaaltA = a.heffingTotaal >= 6, betaaltB = !kanNiet && b.heffingTotaal >= 6;
+    $('verdeel').innerHTML = kanNiet
+      ? (betaaltA ? 'Je betaalt <b>'+M(a.heffingTotaal)+'</b> per maand '+thuis.inHet+'. ' : '')+'Voor '+l.naam+' tonen we hoe de overheid elke € 100 verdeelt.'
+      : (betaaltA || betaaltB)
+      ? 'Je betaalt <b>'+M(Math.max(0,a.heffingTotaal))+'</b> per maand '+thuis.inHet+' en <b>'+M(Math.max(0,b.heffingTotaal))+'</b> '+l.inHet+'. Zo wordt dat verdeeld.'
+      : 'Je betaalt nu geen belasting over je '+(zzp?'winst':'loon')+'. Zo verdeelt de overheid in elk land elke € 100 die ze uitgeeft.';
+    var k = inv.kinderen, personen = 1 + (inv.partner?1:0) + k.k0tot5 + k.k6tot11 + k.k12tot15 + k.k16en17;
+    var mld = function(g, delen){ return g.delen.reduce(function(s,id){ return s+delen[id].mld; },0); };
+    var bedrag = function(betaalt, jouw, deelVan100){ return betaalt ? M(jouw)+' per maand' : '€ '+Math.round(deelVan100*100)+' van elke € 100'; };
+    [].forEach.call($('cats').querySelectorAll('details[data-g]'),function(d){ open[d.getAttribute('data-g')] = d.open; });
+    var n = 0, tot = { a:{houd:0, zelf:0}, b:{houd:0, zelf:0} };
+    $('cats').innerHTML = groepen.map(function(x){
+      var g = x.g, off = !!uit[g.id], ja = a.heffingTotaal*x.a, jb = b.heffingTotaal*x.b;
+      var ma = mld(g,pa), mb = mld(g,pb), ppA = ma*1e9/da.INWONERS, ppB = mb*1e9/db.INWONERS;
+      var c = '<div class="item'+(off?' off':'')+'"><h3>'+g.naam+'</h3><div class="soft small">'+g.uitleg+'</div><div class="duo">'
+        + '<span>'+thuis.naam+'</span><div class="meter"><i style="width:'+(x.a/max*100)+'%"></i></div><span class="n">'+bedrag(betaaltA, ja, x.a)+'</span>'
+        + '<span>'+l.naam+'</span><div class="meter b"><i style="width:'+(x.b/max*100)+'%"></i></div><span class="n">'+bedrag(betaaltB, jb, x.b)+'</span></div>'
+        + '<label class="stop"><span class="switch"><input type="checkbox" data-id="'+g.id+'"'+(off?'':' checked')+'><span></span></span>'
+        + '<span>'+(off?'De overheid is hiermee gestopt':'De overheid betaalt dit')+'</span></label>';
+      if (off){
+        n++; tot.a.houd += ja; tot.a.zelf += ppA*personen; tot.b.houd += jb; tot.b.zelf += ppB*personen;
+        var paar = function(naam, houd, zelf){
+          return '<div class="swapkop">'+naam+'</div><div class="swap"><div class="gain"><span class="l">Je houdt over</span><b>'+M(houd)+'</b><span class="small">per maand</span></div>'
+            + '<div class="cost"><span class="l">Je betaalt zelf</span><b>'+M(zelf)+'</b><span class="small">per maand</span></div></div>';
+        };
+        c += paar(thuis.naam, ja, ppA*personen) + paar(l.naam, kanNiet ? null : jb, ppB*personen)
+          + '<p>Verdeeld over alle inwoners kost dit '+M(ppA)+' per persoon per maand '+thuis.inHet+' en '+M(ppB)+' '+l.inHet+'. '
+          + (personen===1 ? 'Je huishouden telt 1 persoon.' : 'Je huishouden telt '+personen+' personen.')+'</p>';
+      }
+      c += '<details data-g="'+g.id+'"'+(open[g.id]?' open':'')+'><summary>Meer hierover</summary><div class="inner small">'
+        + '<p>Van elke € 100 die de overheid uitgeeft gaat hier '+thuis.inHet+' € '+Math.round(x.a*100)+' naartoe en '+l.inHet+' € '+Math.round(x.b*100)+'.</p>'
+        + '<p>'+thuis.naam+' gaf hier in '+da.JAAR_CIJFERS+' '+num1.format(ma)+' miljard euro aan uit, '+l.naam+' '+num1.format(mb)+' miljard euro.'
+        + (g.delen.length>1 ? ' Dat is samen: '+g.delen.map(function(id){ return pb[id].naam.toLowerCase(); }).join(' en ')+'.' : '')+'</p>'
+        + '</div></details></div>';
+      return c;
+    }).join('');
+    $('sum').classList.toggle('hidden', !n);
+    document.querySelector('.wrap').classList.toggle('metsom', !!n);
+    var saldo = function(naam, t, onbekend){ var s = t.houd - t.zelf;
+      if (onbekend) return '<span><span class="l">'+naam+': per maand</span><b>onbekend</b></span>';
+      return '<span><span class="l">'+naam+': per maand '+(s>=0?'beter af':'slechter af')+'</span><b>'+M(Math.abs(s))+'</b></span>'; };
+    $('sum-in').innerHTML = saldo(thuis.naam, tot.a) + saldo(l.naam, tot.b, !!kanNiet);
+    var pp = function(d){ return E(d.UITGAVEN_TOTAAL*1e9/d.INWONERS); };
+    $('uit-uitleg').textContent = 'Uitgaven van de hele overheid samen in '+db.JAAR_CIJFERS+', voor beide landen uit dezelfde cijfers van Eurostat. '
+      + thuis.naam+' gaf '+num1.format(da.UITGAVEN_TOTAAL)+' miljard euro uit, dat is '+pp(da)+' per inwoner. '
+      + l.naam+' gaf '+num1.format(db.UITGAVEN_TOTAAL)+' miljard euro uit, '+pp(db)+' per inwoner.';
+    $('niet').innerHTML = '<div class="note small">Op de hoofdpagina staan voor Nederland andere bedragen. Daar gaat het om de uitgaven van het Rijk in 2026; hier om alle overheden samen in '+db.JAAR_CIJFERS+', zodat de landen gelijk zijn.</div>'
+      + lijst('Buiten de som voor '+thuis.naam, thuis.nietMeegenomen) + lijst('Buiten de som voor '+l.naam, l.nietMeegenomen);
+  }
+
+  $('b-loon').addEventListener('click',function(){ type='loondienst'; teken(); });
+  $('b-ond').addEventListener('click',function(){ type='ondernemer'; teken(); });
+  ['bruto','omzet','kosten','partner','pink','k0','k6','k12','k16','aow','starter'].forEach(function(id){ $(id).addEventListener('input', teken); });
+  $('cats').addEventListener('change',function(e){
+    var id = e.target.getAttribute('data-id'); if(!id) return;
+    uit[id] = !e.target.checked; teken();
+    var el = $('cats').querySelector('input[data-id="'+id+'"]'); if (el) el.focus();
+  });
+  $('land').addEventListener('change',function(){ tekenVelden(); teken(); });
+  tekenVelden(); teken();
+})();
+</script>
+</body>
+</html>

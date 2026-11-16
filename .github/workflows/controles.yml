@@ -10,3 +10,11 @@ jobs:
       - uses: actions/checkout@v4
       - name: Rekenmodel en cijfers controleren
         run: node test.js
+      - name: Buitenland controleren (elk land in buitenland/landen)
+        run: |
+          set -e
+          for t in buitenland/landen/*/test.js; do
+            echo "== $t"
+            node "$t"
+          done
+          node buitenland/tools/exporteer-data.js --controle
